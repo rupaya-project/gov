@@ -11,7 +11,7 @@
     ],
     "blockchain": {
         "rpc": "https://rpc.testnet.rupx.io",
-        "ws": "wss://ws.testnet.rupx.io",
+        "ws": "wss://ws.testnet.rupx.io/ws",
         "internalRpc": "",
         "internalWs": "",
         "networkId": 89,
@@ -35,7 +35,7 @@
     "baseUrl": "https://gov.testnet.rupx.io/",
     "truffle": {
         "mnemonic": "",
-        "minCandidateCap": "50000000000000000000000",
+        "minCandidateCap": "500000000000000000000000",
         "minVoterCap": "10000000000000000000",
         "maxValidatorNumber": 150,
         "candidateWithdrawDelay": 100,
