@@ -712,7 +712,7 @@ router.get('/:candidate/:owner/getRewards', [
 
         let masternodes = epochData.filter(e => e.status === 'MASTERNODE')
         const rewards = await axios.post(
-            urljoin(config.get('tomoscanUrl'), 'api/expose/MNRewardsByEpochs'),
+            urljoin(config.get('scanUrl'), 'api/expose/MNRewardsByEpochs'),
             {
                 address: candidate,
                 owner: owner,
@@ -856,7 +856,7 @@ router.post('/:candidate/generateMessage', [
             return res.status(406).send('This address is not a candidate')
         }
 
-        const message = '[Tomomaster ' + (new Date().toLocaleString().replace(/['"]+/g, '')) + ']' +
+        const message = '[Rupaya Gov ' + (new Date().toLocaleString().replace(/['"]+/g, '')) + ']' +
             ' I am the owner of candidate ' + '[' + candidate + ']'
         const id = uuidv4()
 

@@ -5,14 +5,14 @@
             align-h="center"
             class="m-0">
             <b-card
-                class="col-12 col-md-8 col-lg-6 tomo-card tomo-card--animated p-0">
-                <h4 class=" color-white tomo-card__title tomo-card__title--big">
+                class="col-12 col-md-8 col-lg-6 rupaya-card rupaya-card--animated p-0">
+                <h4 class=" color-white rupaya-card__title rupaya-card__title--big">
                     <i :class="`tm-${icon}`"/>
                     {{ title }}
                 </h4>
                 <p class="md-content">
                     You have {{ event }}
-                    <span class="color-white">{{ amount }} TOMO</span> for candidate
+                    <span class="color-white">{{ amount }} RUPX</span> for candidate
                     <router-link :to="`/candidate/${candidate}`">
                     {{ truncate(candidate, 20) }}</router-link> successfully.
                     <br ><br >
@@ -86,7 +86,7 @@ export default {
                         self.candidate = transaction.candidate
                         self.txUrl = urljoin(self.config.explorerUrl, `/txs/${self.tx}`)
                         // self.description = `You have ${event}
-                        // <span class="color-white">${amount} TOMO</span> for candidate
+                        // <span class="color-white">${amount} RUPX</span> for candidate
                         // <router-link to="/candidate/${transaction.candidate}">${transaction.candidate}</router-link>
                         // successfully.
                         // <br/><br/>

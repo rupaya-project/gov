@@ -6,11 +6,11 @@
             class="m-0">
             <b-card
                 v-if="!address"
-                :class="'col-12 col-md-8 col-lg-7 tomo-card tomo-card--lighter p-0'
-                + (loading ? ' tomo-loading' : '')">
-                <h4 class="color-white tomo-card__title tomo-card__title--big">Login</h4>
+                :class="'col-12 col-md-8 col-lg-7 rupaya-card rupaya-card--lighter p-0'
+                + (loading ? ' rupaya-loading' : '')">
+                <h4 class="color-white rupaya-card__title rupaya-card__title--big">Login</h4>
                 <b-form
-                    class="tomo-form tomo-form--setting"
+                    class="rupaya-form rupaya-form--setting"
                     novalidate
                     @submit.prevent="validate()">
                     <b-form-group
@@ -24,7 +24,7 @@
                                 class="form-control"
                                 @change="onChangeSelect">
                                 <option
-                                    value="tomowallet">TomoWallet (Recommended)</option>
+                                    value="rupayawallet">RupayaWallet (Recommended)</option>
                                 <option
                                     value="custom">PrivateKey/MNEMONIC</option>
                                 <option
@@ -100,7 +100,7 @@
                     </b-form-group>
 
                     <b-form-group
-                        v-if="provider === 'tomowallet'"
+                        v-if="provider === 'rupayawallet'"
                         class="mb-4"
                         style="text-align: center">
                         <vue-qrcode
@@ -116,7 +116,7 @@
                             </b-button>
                         </div>
                         <div>
-                            <b>In case you do not have TomoWallet, download here</b>
+                            <b>In case you do not have RupayaWallet, download here</b>
                         </div>
                         <div
                             style="margin-top: 5px">
@@ -161,7 +161,7 @@
                             or try path <code
                                 class="hd-path"
                                 @click="changePath(`m/44'/889'/0'/0`)">m/44'/889'/0'/0</code>
-                            with TomoChain App (on Ledger).</small>
+                            with Rupaya App (on Ledger).</small>
                     </b-form-group>
 
                     <b-form-group
@@ -187,7 +187,7 @@
                             <a
                                 href="https://metamask.io/"
                                 target="_blank">Metamask Extension</a>
-                            then connect it to Tomochain Mainnet or Testnet.</p>
+                            then connect it to Rupaya Mainnet or Testnet.</p>
                     </div>
                     <div
                         v-if="!isReady && provider === 'pantograph'">
@@ -195,11 +195,11 @@
                             <a
                                 href="https://pantograph.io/"
                                 target="_blank">Pantograph Extension</a>
-                            then connect it to Tomochain Mainnet or Testnet.</p>
+                            then connect it to Rupaya Mainnet or Testnet.</p>
                     </div>
                     <div class="buttons text-right">
                         <b-button
-                            v-if="provider !== 'tomowallet'"
+                            v-if="provider !== 'rupayawallet'"
                             type="submit"
                             variant="primary">Save</b-button>
                     </div>
@@ -207,14 +207,14 @@
             </b-card>
             <b-card
                 v-if="address"
-                :class="'col-12 col-md-8 col-lg-7 tomo-card tomo-card--lighter p-0'
-                + (loading ? ' tomo-loading' : '')">
-                <h4 class="h4 color-white tomo-card__title tomo-card__title--big">
+                :class="'col-12 col-md-8 col-lg-7 rupaya-card rupaya-card--lighter p-0'
+                + (loading ? ' rupaya-loading' : '')">
+                <h4 class="h4 color-white rupaya-card__title rupaya-card__title--big">
                     Account Information</h4>
-                <ul class="tomo-list list-unstyled">
-                    <li class="tomo-list__item">
-                        <i class="tm-wallet tomo-list__icon" />
-                        <p class="tomo-list__text">
+                <ul class="rupaya-list list-unstyled">
+                    <li class="rupaya-list__item">
+                        <i class="tm-wallet rupaya-list__icon" />
+                        <p class="rupaya-list__text">
                             <router-link
                                 :to="`/voter/${address}`"
                                 class="text-truncate">
@@ -223,9 +223,9 @@
                             <span>Address</span>
                         </p>
                     </li>
-                    <li class="tomo-list__item">
-                        <i class="tm-tomo2 tomo-list__icon" />
-                        <div class="tomo-list__text">
+                    <li class="rupaya-list__item">
+                        <i class="tm-rupaya2 rupaya-list__icon" />
+                        <div class="rupaya-list__text">
                             <p class="color-white mb-0">{{ formatNumber(balance) }}
                             <span class="text-muted">{{ getCurrencySymbol() }}</span></p>
                             <span>Balance</span>
@@ -235,28 +235,28 @@
             </b-card>
             <b-card
                 v-if="isReady && (aw || (wh.length > 0))"
-                :class="'col-12 col-md-8 col-lg-7 tomo-card tomo-card--lighter p-0'
-                + (loading ? ' tomo-loading' : '')">
-                <h4 class="h4 color-white tomo-card__title tomo-card__title--big">
+                :class="'col-12 col-md-8 col-lg-7 rupaya-card rupaya-card--lighter p-0'
+                + (loading ? ' rupaya-loading' : '')">
+                <h4 class="h4 color-white rupaya-card__title rupaya-card__title--big">
                     Withdrawals</h4>
                 <ul
                     v-for="(w, k, index) in withdraws"
                     :key="index"
-                    class="tomo-list list-unstyled">
+                    class="rupaya-list list-unstyled">
                     <li
                         v-if="w.blockNumber !== '0' && w.cap !== '0'"
-                        class="tomo-list__item">
-                        <p class="tomo-list__text">
+                        class="rupaya-list__item">
+                        <p class="rupaya-list__text">
                             <a :href="`${config.explorerUrl}/blocks/${w.blockNumber}`">
                                 {{ w.blockNumber }}</a>
                             <span>Withdrawal Block Number</span>
                         </p>
-                        <!-- <div class="tomo-list__text">
+                        <!-- <div class="rupaya-list__text">
                             <p class="color-white mb-0">
                                 {{ w.estimatedTime }}</p>
                             <span>Estimated Time</span>
                         </div> -->
-                        <div class="tomo-list__text">
+                        <div class="rupaya-list__text">
                             <p class="color-white mb-0">{{ w.cap }}
                             <span class="text-muted">{{ getCurrencySymbol() }}</span></p>
                             <span>Capacity</span>
@@ -265,7 +265,7 @@
                             :disabled="w.blockNumber > chainConfig.blockNumber"
                             variant="primary"
                             @click="withdraw(w.blockNumber, k)">Withdraw</b-button> -->
-                        <div class="tomo-list__text">
+                        <div class="rupaya-list__text">
                             <b-button
                                 :disabled="w.blockNumber > chainConfig.blockNumber"
                                 class="float-right"
@@ -277,27 +277,27 @@
                 <ul
                     v-for="(w, k, index) in wh"
                     :key="index"
-                    class="tomo-list list-unstyled">
+                    class="rupaya-list list-unstyled">
                     <li
-                        class="tomo-list__item">
-                        <p class="tomo-list__text">
+                        class="rupaya-list__item">
+                        <p class="rupaya-list__text">
                             <a :href="`${config.explorerUrl}/txs/${w.tx}`">
                                 {{ (w.tx || '').substring(0,8) }}</a>
                             <span>Transaction</span>
                         </p>
-                        <div class="tomo-list__text">
+                        <div class="rupaya-list__text">
                             <p class="color-white mb-0">{{ w.cap }}
                             <span class="text-muted">{{ getCurrencySymbol() }}</span></p>
                             <span>Capacity</span>
                         </div>
-                        <p class="tomo-list__text"/>
+                        <p class="rupaya-list__text"/>
                     </li>
                 </ul>
             </b-card>
         </b-row>
         <div
             id="hdwalletModal"
-            class="tomo-modal-light"
+            class="rupaya-modal-light"
             style="display: none;">
             <div
                 class="modal-backdrop">
@@ -394,7 +394,7 @@ export default {
             hdPath: "m/44'/889'/0'/0", // HD DerivationPath of hardware wallet
             hdWallets: {}, // list of addresses in hardware wallet
             config: {},
-            provider: 'tomowallet',
+            provider: 'rupayawallet',
             address: '',
             withdraws: [],
             wh: [],
@@ -402,9 +402,9 @@ export default {
             balance: 0,
             chainConfig: {},
             networks: {
-                // mainnet: 'https://core.tomochain.com',
-                rpc: 'https://testnet.tomochain.com',
-                tomowallet: 'https://testnet.tomochain.com'
+                // mainnet: 'https://core.rupx.io',
+                rpc: 'https://rpc.testnet.rupx.io',
+                rupayawallet: 'https://rpc.testnet.rupx.io'
             },
             loading: false,
             qrCode: 'text',
@@ -444,7 +444,7 @@ export default {
         }
     },
     created: async function () {
-        this.provider = this.NetworkProvider || 'tomowallet'
+        this.provider = this.NetworkProvider || 'rupayawallet'
         let self = this
         self.hdWallets = self.hdWallets || {}
         self.config = store.get('configMaster') || await self.appConfig()
@@ -464,11 +464,11 @@ export default {
                 }
                 if (self.web3) {
                     try {
-                        // contract = await self.getTomoValidatorInstance()
-                        contract = self.TomoValidator
+                        // contract = await self.getRupayaValidatorInstance()
+                        contract = self.RupayaValidator
                         self.gasPrice = await self.web3.eth.getGasPrice()
                     } catch (error) {
-                        throw Error('Make sure you choose correct tomochain network.')
+                        throw Error('Make sure you choose correct rupayachain network.')
                     }
                 }
 
@@ -538,7 +538,7 @@ export default {
                 })
             }
         }
-        if (self.provider === 'tomowallet' && !self.address) {
+        if (self.provider === 'rupayawallet' && !self.address) {
             const hasQRCOde = self.loginByQRCode()
             if (await hasQRCOde) {
                 self.interval = setInterval(async () => {
@@ -625,8 +625,8 @@ export default {
                     }
                     break
                 case 'pantograph':
-                    if (window.tomoWeb3) {
-                        var pp = window.tomoWeb3.currentProvider
+                    if (window.rupayaWeb3) {
+                        var pp = window.rupayaWeb3.currentProvider
                         wjs = new Web3(pp)
                     }
                     break
@@ -693,11 +693,11 @@ export default {
             const { data } = await axios.get('/api/auth/generateLoginQR')
             this.id = data.id
             this.qrCode = encodeURI(
-                'tomochain:login?message=' + data.message +
+                'rupayachain:login?message=' + data.message +
                 '&submitURL=' + data.url
             )
             this.qrCodeApp = encodeURI(
-                'tomochain://login?message=' + data.message +
+                'rupayachain://login?message=' + data.message +
                 '&submitURL=' + data.url
             )
             return true
@@ -716,7 +716,7 @@ export default {
         },
         async onChangeSelect (event) {
             switch (event) {
-            case 'tomowallet':
+            case 'rupayawallet':
                 await this.loginByQRCode()
                 this.interval = setInterval(async () => {
                     await this.getLoginResult()
@@ -746,13 +746,13 @@ export default {
 
             await self.setupProvider(this.provider, web3)
             try {
-                // contract = await self.getTomoValidatorInstance()
-                contract = self.TomoValidator
+                // contract = await self.getRupayaValidatorInstance()
+                contract = self.RupayaValidator
             } catch (error) {
                 if (self.interval) {
                     clearInterval(self.interval)
                 }
-                self.$toasted.show('Make sure you choose correct tomochain network.', {
+                self.$toasted.show('Make sure you choose correct rupayachain network.', {
                     type : 'error'
                 })
             }
@@ -818,7 +818,7 @@ export default {
                     }
                 })
             } else {
-                this.$toasted.show('Not enough TOMO for transaction fee', {
+                this.$toasted.show('Not enough RUPX for transaction fee', {
                     type : 'info'
                 })
             }

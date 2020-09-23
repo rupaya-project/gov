@@ -7,27 +7,27 @@
                 align-h="center"
                 class="m-0">
                 <b-card
-                    :class="'col-12 col-md-8 col-lg-6 tomo-card tomo-card--lighter p-0'
-                    + (loading ? ' tomo-loading' : '')">
-                    <h4 class=" color-white tomo-card__title tomo-card__title--big">Vote</h4>
-                    <ul class="tomo-list list-unstyled">
-                        <li class="tomo-list__item">
-                            <i class="tm-tomo2 tomo-list__icon" />
-                            <p class="tomo-list__text">
+                    :class="'col-12 col-md-8 col-lg-6 rupaya-card rupaya-card--lighter p-0'
+                    + (loading ? ' rupaya-loading' : '')">
+                    <h4 class=" color-white rupaya-card__title rupaya-card__title--big">Vote</h4>
+                    <ul class="rupaya-list list-unstyled">
+                        <li class="rupaya-list__item">
+                            <i class="tm-rupaya2 rupaya-list__icon" />
+                            <p class="rupaya-list__text">
                                 <span><router-link :to="`/voter/${voter}`">{{ voter }}</router-link></span>
                                 <span>Voter</span>
                             </p>
                         </li>
-                        <li class="tomo-list__item">
-                            <i class="tm-profile tomo-list__icon" />
-                            <p class="tomo-list__text">
+                        <li class="rupaya-list__item">
+                            <i class="tm-profile rupaya-list__icon" />
+                            <p class="rupaya-list__text">
                                 <span><router-link :to="`/candidate/${candidate}`">{{ candidate }}</router-link></span>
                                 <span>Candidate</span>
                             </p>
                         </li>
-                        <li class="tomo-list__item">
-                            <i class="tm-tomo2 tomo-list__icon" />
-                            <p class="tomo-list__text">
+                        <li class="rupaya-list__item">
+                            <i class="tm-rupaya2 rupaya-list__icon" />
+                            <p class="rupaya-list__text">
                                 <span> {{ formatCurrencySymbol(formatNumber(balance)) }}</span>
                                 <span>Balance</span>
                             </p>
@@ -35,12 +35,12 @@
                     </ul>
 
                     <b-form
-                        class="tomo-form tomo-form--vote"
+                        class="rupaya-form rupaya-form--vote"
                         novalidate
                         @submit.prevent="validate()">
                         <b-form-group
-                            :description="`How much TOMO would you like to vote for this candidate?
-                            TX fee: ${txFee} TOMO`"
+                            :description="`How much RUPX would you like to vote for this candidate?
+                            TX fee: ${txFee} RUPX`"
                             label="Vote"
                             label-for="vote-value">
                             <b-input-group>
@@ -51,17 +51,17 @@
                                     v-model="voteValue"
                                     name="vote-value"/>
                                 <b-input-group-append>
-                                    <i class="tm-tomo2" />
+                                    <i class="tm-rupaya2" />
                                 </b-input-group-append>
                                 <span
                                     v-if="$v.voteValue.$dirty && !$v.voteValue.required"
                                     class="text-danger">Required field</span>
                                 <span
                                     v-else-if="$v.voteValue.$dirty && !$v.voteValue.minValue"
-                                    class="text-danger">Minimum of voting is 100 TOMO</span>
+                                    class="text-danger">Minimum of voting is 100 RUPX</span>
                                 <span
                                     v-else-if="votingError"
-                                    class="text-danger">Not enough TOMO</span>
+                                    class="text-danger">Not enough RUPX</span>
                             </b-input-group>
                         </b-form-group>
                         <div>
@@ -92,11 +92,11 @@
                 align-v="center"
                 align-h="center">
                 <b-card
-                    :class="'col-12 col-md-8 col-lg-6 tomo-card tomo-card--lighter p-0'
-                    + (loading ? ' tomo-loading' : '')">
-                    <h4 class=" color-white tomo-card__title tomo-card__title--big">Confirmation</h4>
+                    :class="'col-12 col-md-8 col-lg-6 rupaya-card rupaya-card--lighter p-0'
+                    + (loading ? ' rupaya-loading' : '')">
+                    <h4 class=" color-white rupaya-card__title rupaya-card__title--big">Confirmation</h4>
                     <!-- <div>
-                        <strong>Using Tomo wallet to execute the action
+                        <strong>Using Rupaya wallet to execute the action
                         </strong>
                     </div> -->
                     <div
@@ -131,7 +131,7 @@
                             </div>
                             <div>
                                 <div
-                                    v-if="provider === 'tomowallet'"
+                                    v-if="provider === 'rupayawallet'"
                                     style="text-align: center; margin-top: 10px">
                                     <vue-qrcode
                                         :value="qrCode"
@@ -148,7 +148,7 @@
                                 variant="secondary"
                                 @click="backStep">Back</b-button>
                             <button
-                                v-if="provider !== 'tomowallet'"
+                                v-if="provider !== 'rupayawallet'"
                                 class="btn btn-primary"
                                 variant="primary"
                                 @click="vote">Submit</button>
@@ -293,8 +293,8 @@ export default {
                 }
                 self.loading = true
                 const account = (await self.getAccount() || '').toLowerCase()
-                let contract// = await self.getTomoValidatorInstance()
-                contract = self.TomoValidator
+                let contract// = await self.getRupayaValidatorInstance()
+                contract = self.RupayaValidator
                 let txParams = {
                     from: account,
                     value: self.web3.utils.toHex(new BigNumber(this.voteValue).multipliedBy(10 ** 18).toString(10)),
@@ -401,13 +401,13 @@ export default {
             self.id = generatedMess.data.id
 
             self.qrCode = encodeURI(
-                'tomochain:vote?amount=' + amount + '&' + 'candidate=' + self.candidate +
+                'rupayachain:vote?amount=' + amount + '&' + 'candidate=' + self.candidate +
                 '&name=' + generatedMess.data.candidateName +
                 '&submitURL=' + generatedMess.data.url
             )
             self.step++
 
-            if (self.step === 2 && self.processing && self.provider === 'tomowallet') {
+            if (self.step === 2 && self.processing && self.provider === 'rupayawallet') {
                 self.interval = setInterval(async () => {
                     await this.verifyScannedQR()
                 }, 3000)

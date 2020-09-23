@@ -12,7 +12,7 @@ var validator = new Validator(web3)
 
 async function watchValidator (from, to) {
     try {
-        logger.info('TomoValidator %s - Listen events from block number %s to %s',
+        logger.info('RupayaValidator %s - Listen events from block number %s to %s',
             config.get('blockchain.validatorAddress'), from, to)
 
         return validator.getPastEvents('allEvents', {

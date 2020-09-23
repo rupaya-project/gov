@@ -1,16 +1,16 @@
 <template>
     <div
         v-if="loadingPage"
-        class="tomo-loading" />
+        class="rupaya-loading" />
     <div v-else>
         <div class="container">
             <div
                 v-if="voted === 0"
                 class="row">
                 <div
-                    class="tomo-empty col-12">
-                    <i class="tm-notice tomo-empty__icon"/>
-                    <p class="tomo-empty__description">You have not voted for this candidate, so you can't unvote.</p>
+                    class="rupaya-empty col-12">
+                    <i class="tm-notice rupaya-empty__icon"/>
+                    <p class="rupaya-empty__description">You have not voted for this candidate, so you can't unvote.</p>
                     <b-button
                         :to="`/voting/${candidate}`"
                         variant="primary">Vote</b-button>
@@ -26,24 +26,24 @@
                         align-h="center"
                         class="m-0">
                         <b-card
-                            :class="'col-12 col-md-8 col-lg-6 tomo-card tomo-card--lighter p-0'
-                            + (loading ? ' tomo-loading' : '')">
-                            <h4 class=" color-white tomo-card__title tomo-card__title--big">Unvote
+                            :class="'col-12 col-md-8 col-lg-6 rupaya-card rupaya-card--lighter p-0'
+                            + (loading ? ' rupaya-loading' : '')">
+                            <h4 class=" color-white rupaya-card__title rupaya-card__title--big">Unvote
                                 <span
-                                    class="tomo-card__subtitle">
-                                    Your TOMO will be locked in a duration after unvoting</span>
+                                    class="rupaya-card__subtitle">
+                                    Your RUPX will be locked in a duration after unvoting</span>
                             </h4>
-                            <ul class="tomo-list list-unstyled">
-                                <li class="tomo-list__item">
-                                    <i class="tm-wallet tomo-list__icon" />
-                                    <p class="tomo-list__text">
+                            <ul class="rupaya-list list-unstyled">
+                                <li class="rupaya-list__item">
+                                    <i class="tm-wallet rupaya-list__icon" />
+                                    <p class="rupaya-list__text">
                                         <span><router-link :to="`/voter/${voter}`">{{ voter }}</router-link></span>
                                         <span>Voter</span>
                                     </p>
                                 </li>
-                                <li class="tomo-list__item">
-                                    <i class="tm-profile tomo-list__icon" />
-                                    <p class="tomo-list__text">
+                                <li class="rupaya-list__item">
+                                    <i class="tm-profile rupaya-list__icon" />
+                                    <p class="rupaya-list__text">
                                         <span>
                                             <router-link :to="`/candidate/${candidate}`">
                                                 {{ candidate }}
@@ -52,9 +52,9 @@
                                         <span>Candidate</span>
                                     </p>
                                 </li>
-                                <li class="tomo-list__item">
-                                    <i class="tm-tomo2 tomo-list__icon" />
-                                    <p class="tomo-list__text">
+                                <li class="rupaya-list__item">
+                                    <i class="tm-rupaya2 rupaya-list__icon" />
+                                    <p class="rupaya-list__text">
                                         <span> {{ formatCurrencySymbol(formatNumber(voted)) }}
                                             - <a
                                                 href="javascript:"
@@ -65,11 +65,11 @@
                             </ul>
 
                             <b-form
-                                class="tomo-form tomo-form--unvote"
+                                class="rupaya-form rupaya-form--unvote"
                                 novalidate
                                 @submit.prevent="validate()">
                                 <b-form-group
-                                    :description="`The amount of TOMO to unvote. TX fee: ${txFee} TOMO`"
+                                    :description="`The amount of RUPX to unvote. TX fee: ${txFee} RUPX`"
                                     label="Amount"
                                     label-for="unvote-value">
                                     <b-input-group>
@@ -81,7 +81,7 @@
                                             name="vote-value"
                                             @input="onChange"/>
                                         <b-input-group-append>
-                                            <i class="tm-tomo2" />
+                                            <i class="tm-rupaya2" />
                                         </b-input-group-append>
                                         <span
                                             v-if="$v.unvoteValue.$dirty && !$v.unvoteValue.required"
@@ -91,14 +91,14 @@
                                             class="text-danger">Must be number </span>
                                         <!-- <span
                                             v-else-if="isMin"
-                                            class="text-danger">Minimum of unvoting is 100 TOMO </span> -->
+                                            class="text-danger">Minimum of unvoting is 100 RUPX </span> -->
                                         <span
                                             v-else-if="isMax"
                                             class="text-danger">
-                                            Must be less than {{ limitedUnvote }} TOMO </span>
+                                            Must be less than {{ limitedUnvote }} RUPX </span>
                                         <span
-                                            v-else-if="!isEnoughTomo"
-                                            class="text-danger">Voted amount left should not less than 100 TOMO </span>
+                                            v-else-if="!isEnoughRupx"
+                                            class="text-danger">Voted amount left should not less than 100 RUPX </span>
                                     </b-input-group>
                                 </b-form-group>
                                 <div class="buttons text-right">
@@ -124,11 +124,11 @@
                         align-v="center"
                         align-h="center">
                         <b-card
-                            :class="'col-12 col-md-8 col-lg-6 tomo-card tomo-card--lighter p-0'
-                            + (loading ? ' tomo-loading' : '')">
-                            <h4 class=" color-white tomo-card__title tomo-card__title--big">Confirmation</h4>
+                            :class="'col-12 col-md-8 col-lg-6 rupaya-card rupaya-card--lighter p-0'
+                            + (loading ? ' rupaya-loading' : '')">
+                            <h4 class=" color-white rupaya-card__title rupaya-card__title--big">Confirmation</h4>
                             <!-- <div>
-                                <strong>Using Tomo wallet to execute the action
+                                <strong>Using Rupaya wallet to execute the action
                                 </strong>
                             </div> -->
                             <div
@@ -163,7 +163,7 @@
                                     </div>
                                     <div>
                                         <div
-                                            v-if="provider === 'tomowallet'"
+                                            v-if="provider === 'rupayawallet'"
                                             style="text-align: center; margin-top: 10px">
                                             <vue-qrcode
                                                 :value="qrCode"
@@ -180,7 +180,7 @@
                                         variant="secondary"
                                         @click="backStep">Back</b-button>
                                     <button
-                                        v-if="provider !== 'tomowallet'"
+                                        v-if="provider !== 'rupayawallet'"
                                         class="btn btn-primary"
                                         variant="primary"
                                         @click="unvote">Submit</button>
@@ -228,7 +228,7 @@ export default {
             isMin: false,
             isMax: false,
             isNumeric: true,
-            isEnoughTomo: true,
+            isEnoughRupx: true,
             minValue: new BigNumber(100),
             maxValue: new BigNumber(this.voted),
             converted: null,
@@ -273,8 +273,8 @@ export default {
 
             const isOwnerPromise = axios.get(`/api/candidates/${candidate}/${self.voter}/isOwner`)
 
-            let contract// = await self.getTomoValidatorInstance()
-            contract = self.TomoValidator
+            let contract// = await self.getRupayaValidatorInstance()
+            contract = self.RupayaValidator
             // let votedCap = await contract.getVoterCap(candidate, account)
             let votedCap = await contract.methods.getVoterCap(candidate, self.voter).call()
 
@@ -306,9 +306,9 @@ export default {
             // check numeric
             this.isNumeric = this.validateNumeric(this.unvoteValue)
             // check voted amount left
-            this.isEnoughTomo = this.validateTomoLeft(this.unvoteValue)
+            this.isEnoughRupx = this.validateRupxLeft(this.unvoteValue)
 
-            if (this.isNumeric && !this.isMax && this.isEnoughTomo) {
+            if (this.isNumeric && !this.isMax && this.isEnoughRupx) {
                 this.$v.$touch()
                 if (!this.$v.$invalid) {
                     this.nextStep()
@@ -328,8 +328,8 @@ export default {
                 self.loading = true
                 let unvoteValue = new BigNumber(value).multipliedBy(1e+18).toString(10)
                 const account = (await self.getAccount() || '').toLowerCase()
-                let contract// = await self.getTomoValidatorInstance()
-                contract = self.TomoValidator
+                let contract// = await self.getRupayaValidatorInstance()
+                contract = self.RupayaValidator
                 let txParams = {
                     from: account,
                     gasPrice: self.web3.utils.toHex(self.gasPrice),
@@ -434,12 +434,12 @@ export default {
             self.id = generatedMess.data.id
 
             self.qrCode = encodeURI(
-                'tomochain:unvote?amount=' + amount + '&' + 'candidate=' + self.candidate +
+                'rupayachain:unvote?amount=' + amount + '&' + 'candidate=' + self.candidate +
                 '&name=' + generatedMess.data.candidateName +
                 '&submitURL=' + generatedMess.data.url
             )
             this.step++
-            if (self.step === 2 && self.provider === 'tomowallet') {
+            if (self.step === 2 && self.provider === 'rupayawallet') {
                 self.interval = setInterval(async () => {
                     await this.verifyScannedQR()
                 }, 3000)
@@ -500,7 +500,7 @@ export default {
             }
             return true
         },
-        validateTomoLeft (value) {
+        validateRupxLeft (value) {
             this.converted = new BigNumber(value) // unvote value
             this.maxValue = new BigNumber(this.voted)
             const acceptedValue = this.maxValue.isGreaterThanOrEqualTo(this.converted)
@@ -524,16 +524,16 @@ export default {
             this.isMin = false
             this.isMax = false
             this.isNumeric = true
-            this.isEnoughTomo = true
+            this.isEnoughRupx = true
             // check maxValue
             this.isMax = this.validateMaxAmount(unvoteValue)
             // check numeric
             this.isNumeric = this.validateNumeric(unvoteValue)
             // check voted amount left
-            this.isEnoughTomo = this.validateTomoLeft(unvoteValue)
+            this.isEnoughRupx = this.validateRupxLeft(unvoteValue)
             const btn = document.getElementById('nextBtn')
 
-            if (!this.isNumeric || this.isMax || !this.isEnoughTomo) {
+            if (!this.isNumeric || this.isMax || !this.isEnoughRupx) {
                 btn.disabled = true
             } else {
                 btn.disabled = false

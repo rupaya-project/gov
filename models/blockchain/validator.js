@@ -1,6 +1,6 @@
 'use strict'
 
-const ValidatorABI = require('../../build/contracts/TomoValidator')
+const ValidatorABI = require('../../build/contracts/RupayaValidator')
 const config = require('config')
 
 function Validator (web3) {

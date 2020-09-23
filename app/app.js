@@ -21,7 +21,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Web3 from 'web3'
 // import { default as contract } from 'truffle-contract'
-// import TomoValidatorArtifacts from '../build/contracts/TomoValidator.json'
+// import RupayaValidatorArtifacts from '../build/contracts/RupayaValidator.json'
 import Toasted from 'vue-toasted'
 import axios from 'axios'
 // import BigNumber from 'bignumber.js'
@@ -66,14 +66,14 @@ Vue.use(Toasted, {
 
 // set trezor's manifest
 TrezorConnect.manifest({
-    email: 'admin@tomochain.com',
-    appUrl: 'https://master.tomochain.com'
+    email: 'aasim@rupx.io',
+    appUrl: 'https://gov.rupx.io'
 })
 
 // stockInit(Highcharts)
 // Vue.use(HighchartsVue)
 
-// Vue.prototype.TomoValidator = contract(TomoValidatorArtifacts)
+// Vue.prototype.RupayaValidator = contract(RupayaValidatorArtifacts)
 Vue.prototype.isElectron = !!(window && window.process && window.process.type)
 
 Vue.prototype.setupProvider = async function (provider, wjs) {
@@ -82,8 +82,8 @@ Vue.prototype.setupProvider = async function (provider, wjs) {
         const config = await getConfig()
         localStorage.set('configMaster', config)
         Vue.prototype.web3 = wjs
-        Vue.prototype.TomoValidator = new wjs.eth.Contract(
-            Helper.TomoValidatorArtifacts.abi,
+        Vue.prototype.RupayaValidator = new wjs.eth.Contract(
+            Helper.RupayaValidatorArtifacts.abi,
             config.blockchain.validatorAddress
         )
     }
@@ -103,15 +103,15 @@ Vue.prototype.getAccount = async function () {
         break
     case 'pantograph':
         // Request account access if needed - for metamask
-        if (window.tomochain) {
-            await window.tomochain.enable()
+        if (window.rupaya) {
+            await window.rupaya.enable()
         }
         account = (await wjs.eth.getAccounts())[0]
         break
-    case 'tomowalletDapp':
+    case 'rupayawalletDapp':
         account = (await wjs.eth.getAccounts())[0]
         break
-    case 'tomowallet':
+    case 'rupayawallet':
         account = this.$store.state.address
         break
     case 'custom':
@@ -348,13 +348,13 @@ router.beforeEach(async (to, from, next) => {
 })
 
 getConfig().then((config) => {
-    // let provider = 'tomowallet'
+    // let provider = 'rupayawallet'
     // var web3js = new Web3(new Web3.providers.HttpProvider(config.blockchain.internalRpc))
     // Vue.prototype.setupProvider(provider, web3js)
     localStorage.set('configMaster', config)
     Vue.use(VueAnalytics, {
         id: config.GA,
-        linkers: ['master.tomochain.com'],
+        linkers: ['gov.rupx.io'],
         router,
         autoTraking: {
             screenView: true
@@ -380,7 +380,7 @@ Vue.prototype.detectNetwork = async function (provider) {
         if (!wjs) {
             switch (provider) {
             case 'metamask':
-            case 'tomowalletDapp':
+            case 'rupayawalletDapp':
                 if (window.web3) {
                     if (window.web3.currentProvider) {
                         let p = window.web3.currentProvider
@@ -391,16 +391,16 @@ Vue.prototype.detectNetwork = async function (provider) {
                 }
                 break
             case 'pantograph':
-                if (window.tomoWeb3) {
-                    if (window.tomoWeb3.currentProvider) {
-                        let pp = window.tomoWeb3.currentProvider
+                if (window.rupayaWeb3) {
+                    if (window.rupayaWeb3.currentProvider) {
+                        let pp = window.rupayaWeb3.currentProvider
                         wjs = new Web3(pp)
                     } else {
-                        wjs = window.tomoWeb3
+                        wjs = window.rupayaWeb3
                     }
                 }
                 break
-            case 'tomowallet':
+            case 'rupayawallet':
                 wjs = new Web3(new HDWalletProvider(
                     '',
                     chainConfig.rpc, 0, 1, true))
@@ -421,20 +421,20 @@ Vue.prototype.detectNetwork = async function (provider) {
 }
 
 /**
- * @return TomoValidator contract instance
+ * @return RupayaValidator contract instance
  */
-Vue.prototype.getTomoValidatorInstance = async function () {
+Vue.prototype.getRupayaValidatorInstance = async function () {
     // workaround for web3 version 1.0.0
     // @link https://github.com/trufflesuite/truffle-contract/issues/57#issuecomment-331300494
-    if (typeof Vue.prototype.TomoValidator.currentProvider.sendAsync !== 'function') {
-        Vue.prototype.TomoValidator.currentProvider.sendAsync = function () {
-            return Vue.prototype.TomoValidator.currentProvider.send.apply(
-                Vue.prototype.TomoValidator.currentProvider,
+    if (typeof Vue.prototype.RupayaValidator.currentProvider.sendAsync !== 'function') {
+        Vue.prototype.RupayaValidator.currentProvider.sendAsync = function () {
+            return Vue.prototype.RupayaValidator.currentProvider.send.apply(
+                Vue.prototype.RupayaValidator.currentProvider,
                 arguments
             )
         }
     }
-    let instance = await Vue.prototype.TomoValidator.deployed()
+    let instance = await Vue.prototype.RupayaValidator.deployed()
     return instance
 }
 

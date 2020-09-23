@@ -6,13 +6,13 @@
                 align-h="center"
                 class="m-0">
                 <b-card
-                    :class="'col-12 col-md-8 col-lg-6 tomo-card tomo-card--animated p-0'
-                    + (loading ? ' tomo-loading' : '')">
-                    <h4 class=" color-white tomo-card__title tomo-card__title--big">Resign</h4>
-                    <ul class="tomo-list list-unstyled">
-                        <li class="tomo-list__item">
-                            <i class="tm-wallet tomo-list__icon" />
-                            <p class="tomo-list__text">
+                    :class="'col-12 col-md-8 col-lg-6 rupaya-card rupaya-card--animated p-0'
+                    + (loading ? ' rupaya-loading' : '')">
+                    <h4 class=" color-white rupaya-card__title rupaya-card__title--big">Resign</h4>
+                    <ul class="rupaya-list list-unstyled">
+                        <li class="rupaya-list__item">
+                            <i class="tm-wallet rupaya-list__icon" />
+                            <p class="rupaya-list__text">
                                 <span>{{ coinbase }}</span>
                                 <span>Coinbase Address</span>
                             </p>
@@ -41,7 +41,7 @@
         </div>
         <b-modal
             id="confirmResignModal"
-            class="tomo-modal"
+            class="rupaya-modal"
             centered
             title="Do you want to resign?"
             ok-title="Yes"
@@ -51,12 +51,12 @@
         </b-modal>
         <b-modal
             ref="resignModal"
-            class="tomo-modal"
+            class="rupaya-modal"
             centered
-            title="Scan this QR code by TomoWallet"
+            title="Scan this QR code by RupayaWallet"
             hide-footer>
             <div
-                v-if="provider === 'tomowallet'"
+                v-if="provider === 'rupayawallet'"
                 style="text-align: center">
                 <vue-qrcode
                     :value="qrCode"
@@ -131,8 +131,8 @@ export default {
                 self.loading = true
 
                 const account = (await self.getAccount() || '').toLowerCase()
-                let contract// = await self.getTomoValidatorInstance()
-                contract = self.TomoValidator
+                let contract// = await self.getRupayaValidatorInstance()
+                contract = self.RupayaValidator
                 let coinbase = self.coinbase
                 let txParams = {
                     from: account,
@@ -221,7 +221,7 @@ export default {
         async resignValidation () {
             const self = this
             try {
-                if (self.provider === 'tomowallet') {
+                if (self.provider === 'rupayawallet') {
                     if (self.interval) {
                         clearInterval(self.interval)
                     }
@@ -237,7 +237,7 @@ export default {
                     self.id = generatedMess.data.id
 
                     self.qrCode = encodeURI(
-                        'tomochain:resign?candidate=' + self.coinbase +
+                        'rupayachain:resign?candidate=' + self.coinbase +
                         '&submitURL=' + generatedMess.data.url
                     )
                     self.$refs.resignModal.show()

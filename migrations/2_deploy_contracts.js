@@ -1,5 +1,5 @@
-const TomoValidator = artifacts.require('./TomoValidator');
-const TomoRandomize = artifacts.require('./TomoRandomize');
+const RupayaValidator = artifacts.require('./RupayaValidator');
+const RupayaRandomize = artifacts.require('./RupayaRandomize');
 const BlockSigner = artifacts.require('./BlockSigner');
 
 const config = require('config');
@@ -26,8 +26,8 @@ module.exports = function(deployer) {
         '50000000000000000000000'
     ]
     let firstOwner = '0x487d62d33467c4842c5e54Eb370837E4E88BBA0F'
-    return deployer.deploy(TomoValidator, candidates, caps, firstOwner, minCandidateCap, minVoterCap, maxValidatorNumber, candidateWithdrawDelay, voterWithdrawDelay).then((tv) => {
-        return  deployer.deploy(TomoRandomize)
+    return deployer.deploy(RupayaValidator, candidates, caps, firstOwner, minCandidateCap, minVoterCap, maxValidatorNumber, candidateWithdrawDelay, voterWithdrawDelay).then((tv) => {
+        return  deployer.deploy(RupayaRandomize)
     }). then(() => {
         return deployer.deploy(BlockSigner, epochNumber);
     })

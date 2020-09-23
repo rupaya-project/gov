@@ -24,7 +24,7 @@ async function watchValidator () {
     var blockNumber = cpValidator || await web3.eth.getBlockNumber()
     try {
         blockNumber = blockNumber || await web3.eth.getBlockNumber()
-        logger.info('TomoValidator %s - Listen events from block number %s ...',
+        logger.info('RupayaValidator %s - Listen events from block number %s ...',
             config.get('blockchain.validatorAddress'), blockNumber)
 
         cpValidator = await web3.eth.getBlockNumber()

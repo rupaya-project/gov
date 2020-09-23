@@ -29,7 +29,7 @@
                         </b-navbar-nav>
                         <b-navbar-nav class="ml-auto navbar-buttons">
                             <b-button
-                                v-if="!isTomonet"
+                                v-if="!isRupxnet"
                                 id="btn-become-candidate"
                                 to="/setting"
                                 variant="primary">Login</b-button>
@@ -50,8 +50,8 @@
                                         class="tm-bell icon-2x"
                                         @click="readClick" />
                                     <span
-                                        :class="`notification__bell tomo-status-dot tomo-status-dot--yellow`"
-                                        :style="(isTomonet ? (readNoti <= 0 ? 'display: none;': '') : statusClass)"/>
+                                        :class="`notification__bell rupaya-status-dot rupaya-status-dot--yellow`"
+                                        :style="(isRupxnet ? (readNoti <= 0 ? 'display: none;': '') : statusClass)"/>
                                 </template>
                                 <b-dropdown-text>
                                     <div class="notification_header">
@@ -64,7 +64,7 @@
                                 </b-dropdown-text>
                                 <b-dropdown-divider />
                                 <div
-                                    v-if="isTomonet"
+                                    v-if="isRupxnet"
                                     class="notification_body">
                                     <div
                                         v-if="notifications.length <= 0"
@@ -86,7 +86,7 @@
                                                     </router-link>]
                                                     has been slashed
                                                 </span>
-                                                <div class="notification_body__time">TomoMaster -
+                                                <div class="notification_body__time">RupayaGov -
                                                     {{ value.createdAt }}</div>
                                             </div>
                                         </b-dropdown-text>
@@ -106,7 +106,7 @@
                                                     </router-link>]
                                                     left the top 150 and is no longer a masternode.
                                                 </span>
-                                                <div class="notification__time">TomoMaster -
+                                                <div class="notification__time">RupayaGov -
                                                     {{ value.createdAt }}</div>
                                             </div>
                                         </b-dropdown-text>
@@ -125,7 +125,7 @@
                                                     Its time to gather votes from community by promoting it and
                                                     be in top 150 to get your first reward.
                                                 </span>
-                                                <div class="notification__time">TomoMaster -
+                                                <div class="notification__time">RupayaGov -
                                                     {{ value.createdAt }}</div>
                                             </div>
                                         </b-dropdown-text>
@@ -144,7 +144,7 @@
                                                         <span class="masternode-name">{{ value.name }}</span>
                                                     </router-link>] resigned
                                                 </span>
-                                                <div class="notification__time">TomoMaster -
+                                                <div class="notification__time">RupayaGov -
                                                     {{ value.createdAt }}</div>
                                             </div>
                                         </b-dropdown-text>
@@ -158,9 +158,9 @@
                                                     'font-weight: bold;'"
                                                     class="notification__content">
                                                     <span class="notification_label withdraw">Withdraw</span>
-                                                    {{ value.amount }} unvoted TOMO are ready to withdraw
+                                                    {{ value.amount }} unvoted RUPX are ready to withdraw
                                                 </span>
-                                                <div class="notification__time">TomoMaster -
+                                                <div class="notification__time">RupayaGov -
                                                     {{ value.createdAt }}</div>
                                             </div>
                                         </b-dropdown-text>
@@ -170,18 +170,18 @@
                                     </div>
                                 </div>
                                 <div
-                                    v-if="!isTomonet"
+                                    v-if="!isRupxnet"
                                     class="notification_body">
                                     <b-dropdown-text>
                                         <div style="font-size: 13px;">
-                                            <strong>TomoMaster up to 1.6.4</strong>
+                                            <strong>RupayaGov up to 1.6.4</strong>
                                             <p>- Support pantograph</p>
                                         </div>
                                     </b-dropdown-text>
                                     <b-dropdown-divider/>
                                     <b-dropdown-text>
                                         <div style="font-size: 13px;">
-                                            <strong>TomoMaster up to 1.6.3</strong>
+                                            <strong>RupayaGov up to 1.6.3</strong>
                                             <p>- Remove masternode balance</p>
                                             <p>- Display masternode name in reward table</p>
                                             <p>- Improve loading reward table</p>
@@ -191,14 +191,14 @@
                                     <b-dropdown-divider/>
                                     <b-dropdown-text>
                                         <div style="font-size: 13px;">
-                                            <strong>TomoMaster up to 1.6.2</strong>
+                                            <strong>RupayaGov up to 1.6.2</strong>
                                             <p>- Fix test api issue</p>
                                         </div>
                                     </b-dropdown-text>
                                     <b-dropdown-divider/>
                                     <b-dropdown-text>
                                         <div style="font-size: 13px;">
-                                            <strong>TomoMaster up to 1.6.1</strong>
+                                            <strong>RupayaGov up to 1.6.1</strong>
                                             <p>- Add check owner address</p>
                                             <p>- Clean unused libraries</p>
                                             <p>- Update webpack</p>
@@ -207,7 +207,7 @@
                                     <b-dropdown-divider/>
                                     <b-dropdown-text>
                                         <div style="font-size: 13px;">
-                                            <strong>TomoMaster up to 1.6.0</strong>
+                                            <strong>RupayaGov up to 1.6.0</strong>
                                             <p>- Add Auto tweeting when a new candidate is proposed</p>
                                             <p>- Update searching</p>
                                             <p>- Add top page pagination on small screen</p>
@@ -217,7 +217,7 @@
                                     <b-dropdown-divider/>
                                     <b-dropdown-text>
                                         <div style="font-size: 13px;">
-                                            <strong>TomoMaster up to 1.5.2</strong>
+                                            <strong>RupayaGov up to 1.5.2</strong>
                                             <p>- Hide latest signed block for proposed masternode</p>
                                             <p>- Refactor code</p>
                                         </div>
@@ -225,7 +225,7 @@
                                     <b-dropdown-divider/>
                                     <b-dropdown-text>
                                         <div style="font-size: 13px;">
-                                            <strong>TomoMaster up to 1.5.1</strong>
+                                            <strong>RupayaGov up to 1.5.1</strong>
                                             <p>- Hide staking ROI if a masternode out of top 150</p>
                                             <p>- Fix missing latest reward record</p>
                                         </div>
@@ -233,7 +233,7 @@
                                     <b-dropdown-divider/>
                                     <b-dropdown-text>
                                         <div style="font-size: 13px;">
-                                            <strong>TomoMaster up to 1.5.0</strong>
+                                            <strong>RupayaGov up to 1.5.0</strong>
                                             <p>- Display average ROI for masternode owner and voter</p>
                                             <p>- Display owner ROI and voter ROI in masternode detail page</p>
                                             <p>- Add withdrawal notification</p>
@@ -242,15 +242,15 @@
                                     </b-dropdown-text>
                                 </div>
                                 <b-dropdown-divider
-                                    v-if="!isTomonet" />
+                                    v-if="!isRupxnet" />
                                 <b-dropdown-text
-                                    v-if="!isTomonet"
+                                    v-if="!isRupxnet"
                                     class="notification_bottom">
-                                    TomoMaster - {{ version }}
+                                    RupayaGov - {{ version }}
                                 </b-dropdown-text>
                             </b-dropdown>
                             <b-dropdown
-                                v-if="isTomonet"
+                                v-if="isRupxnet"
                                 class="dd-setting ml-1"
                                 right
                                 offset="25"
@@ -272,7 +272,7 @@
                                 <b-dropdown-item to="/setting">Settings/Withdraws</b-dropdown-item>
                                 <b-dropdown-divider />
                                 <b-dropdown-item
-                                    v-if="!mobileCheck && isTomonet"
+                                    v-if="!mobileCheck && isRupxnet"
                                     href="/"
                                     @click="signOut">Sign out</b-dropdown-item>
                             </b-dropdown>
@@ -284,18 +284,18 @@
                 <router-view/>
             </div>
             <footer
-                class="tomo-footer">
+                class="rupaya-footer">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8">
-                            <div class="tomo-footer__copyright">
-                                TomoMaster &copy; {{ (new Date()).getFullYear() }} -
+                            <div class="rupaya-footer__copyright">
+                                RupayaGov &copy; {{ (new Date()).getFullYear() }} -
                                 <a
-                                    :href="`https://github.com/tomochain/tomomaster/releases/tag/v${version}`"
+                                    :href="`https://github.com/rupaya-project/gov/releases/tag/v${version}`"
                                     class="version-tag">
                                     v{{ version }}</a>
                             </div>
-                            <div class="tomo-footer__links">
+                            <div class="rupaya-footer__links">
                                 <ul class="list-inline">
                                     <li class="list-inline-item">
                                         <a
@@ -306,13 +306,13 @@
                                     <li class="list-inline-item">
                                         <a
                                             target="_blank"
-                                            href="https://docs.tomochain.com/legal/privacy">
+                                            href="https://docs.rupx.io/legal/privacy">
                                         <i class="tm-lock mr-1"/>Privacy Policy</a>
                                     </li>
                                     <li class="list-inline-item">
                                         <a
                                             target="_blank"
-                                            href="https://docs.tomochain.com/legal/terms-of-use">
+                                            href="https://docs.rupx.io/legal/terms-of-use">
                                         <i class="tm-profile mr-1"/>Terms of Use</a>
                                     </li>
                                     <li class="list-inline-item">
@@ -323,39 +323,39 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-4 tomo-footer__social">
+                        <div class="col-md-4 rupaya-footer__social">
                             <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <a
-                                        href="https://t.me/tomochain"
+                                        href="https://t.me/rupayachain"
                                         target="_blank">
                                         <i class="tm-telegram" />
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a
-                                        href="https://www.facebook.com/tomochainofficial"
+                                        href="https://www.facebook.com/rupayachainofficial"
                                         target="_blank">
                                         <i class="tm-facebook" />
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a
-                                        href="https://twitter.com/TomoChainANN"
+                                        href="https://twitter.com/RupayaANN"
                                         target="_blank">
                                         <i class="tm-twitter" />
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a
-                                        href="https://github.com/tomochain/"
+                                        href="https://github.com/rupayachain/"
                                         target="_blank">
                                         <i class="tm-github" />
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a
-                                        href="https://www.reddit.com/r/Tomochain/"
+                                        href="https://www.reddit.com/r/Rupaya/"
                                         target="_blank">
                                         <i class="tm-reddit" />
                                     </a>
@@ -378,9 +378,9 @@ import AutoComplete from './components/AutoComplete.vue'
 export default {
     name: 'App',
     metaInfo: {
-        title: 'TomoChain Governance DApp | TomoMaster',
+        title: 'Rupaya Governance DApp | RupayaGov',
         meta: [
-            { name: 'description', content: 'Tomomaster - Providing a professional UI which allows coin-holders to stake for masternodes, decentralized governance and explore masternode performance statistics' } // eslint-disable-line
+            { name: 'description', content: 'Rupaya Gov - Providing a professional UI which allows coin-holders to stake for masternodes, decentralized governance and explore masternode performance statistics' } // eslint-disable-line
         ]
     },
     components: {
@@ -392,7 +392,7 @@ export default {
             showProgressBar: false,
             selectedCandidate: null,
             search: null,
-            isTomonet: false,
+            isRupxnet: false,
             version: pkg.version,
             account: '',
             items: [],
@@ -400,7 +400,7 @@ export default {
             interval: '',
             notifications: [],
             readNoti: 0,
-            needHelpLink: 'https://docs.tomochain.com/faq/products/tomochain-applications/tomomaster'
+            needHelpLink: 'https://docs.rupx.io/faq/products/rupayachain-applications/gov'
         }
     },
     computed: {
@@ -443,7 +443,7 @@ export default {
             setTimeout(async () => {
                 await self.getNotification()
             }, 500)
-            if (this.isTomonet) {
+            if (this.isRupxnet) {
                 this.interval = setInterval(async () => {
                     await this.getNotification()
                 }, 40000)
@@ -485,12 +485,12 @@ export default {
             let self = this
             setTimeout(async () => {
                 try {
-                    let contract// = await self.getTomoValidatorInstance()
-                    contract = self.TomoValidator
+                    let contract// = await self.getRupayaValidatorInstance()
+                    contract = self.RupayaValidator
                     self.account = store.get('address') ||
                         self.$store.state.address || await self.getAccount()
                     if (self.account && contract) {
-                        self.isTomonet = true
+                        self.isRupxnet = true
                     }
                 } catch (error) {}
             }, 0)
@@ -510,7 +510,7 @@ export default {
         async getNotification () {
             try {
                 const self = this
-                if (self.account && self.isTomonet) {
+                if (self.account && self.isRupxnet) {
                     const { data } = await axios.get('/api/voters/' + self.account.toLowerCase() + '/getNotification')
                     if (data.length > 0) {
                         let items = []

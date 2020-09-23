@@ -10,33 +10,33 @@
                     </h3>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <b-card class="tomo-card">
-                        <h6 class="tomo-card__title">Current Block</h6>
-                        <p class="tomo-card__text">
+                    <b-card class="rupaya-card">
+                        <h6 class="rupaya-card__title">Current Block</h6>
+                        <p class="rupaya-card__text">
                             #{{ chainConfig.blockNumber }}
                         </p>
                     </b-card>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <b-card class="tomo-card tomo-card">
-                        <h6 class="tomo-card__title">Epoch</h6>
-                        <p class="tomo-card__text">
+                    <b-card class="rupaya-card rupaya-card">
+                        <h6 class="rupaya-card__title">Epoch</h6>
+                        <p class="rupaya-card__text">
                             #{{ Math.floor(chainConfig.blockNumber / chainConfig.epoch) + 1 }}</p>
                     </b-card>
                 </div>
                 <div
                     class="col-md-6 col-lg-3">
-                    <b-card class="tomo-card tomo-card">
-                        <h6 class="tomo-card__title">Avg. Staking ROI</h6>
-                        <p class="tomo-card__text">
+                    <b-card class="rupaya-card rupaya-card">
+                        <h6 class="rupaya-card__title">Avg. Staking ROI</h6>
+                        <p class="rupaya-card__text">
                             {{ averageStakingROI ? averageStakingROI + '%' : '---' }}</p>
                     </b-card>
                 </div>
                 <div
                     class="col-md-6 col-lg-3">
-                    <b-card class="tomo-card tomo-card">
-                        <h6 class="tomo-card__title">Avg. Owner ROI</h6>
-                        <p class="tomo-card__text">
+                    <b-card class="rupaya-card rupaya-card">
+                        <h6 class="rupaya-card__title">Avg. Owner ROI</h6>
+                        <p class="rupaya-card__text">
                             <!-- eslint-disable-next-line max-len -->
                             {{ averageOwnerROI ? averageOwnerROI + '%' : '---' }}</p>
                     </b-card>
@@ -80,7 +80,7 @@
 
         <div
             v-if="candidates.length <= 0"
-            class="tomo-loading"/>
+            class="rupaya-loading"/>
         <div
             v-else
             class="container">
@@ -90,14 +90,14 @@
                 :per-page="perPage"
                 v-model="currentPage"
                 align="center"
-                class="tomo-pagination"
+                class="rupaya-pagination"
                 style="margin-bottom: 50px !important;"
                 @change="pageChange"/>
             <b-table
                 :items="candidates"
                 :fields="fields"
                 :per-page="perPage"
-                :class="'tomo-table tomo-table--candidates ' + tableCssClass"
+                :class="'rupaya-table rupaya-table--candidates ' + tableCssClass"
                 empty-text="There are no candidates to show"
                 stacked="lg"
                 @sort-changed="sortingChange" >
@@ -137,7 +137,7 @@
                     <div>
                         <span
                             :class="`float-left mr-2 ${(data.item.status !== 'PROPOSED')
-                                ? ` tomo-status-dot tomo-status-dot--${getColor(
+                                ? ` rupaya-status-dot rupaya-status-dot--${getColor(
                             data.item.latestSignedBlock || '', currentBlock)}` : '' }`">
                             {{ data.item.latestSignedBlock }}
                         </span>
@@ -149,9 +149,9 @@
                     slot-scope="data">
                     <div class="mt-2 mt-lg-0">
                         <span
-                            :class="'tomo-chip '
+                            :class="'rupaya-chip '
                                 + (data.item.status === 'PROPOSED' || data.item.status === 'MASTERNODE' ?
-                            'tomo-chip--primary' : 'tomo-chip--accent') ">
+                            'rupaya-chip--primary' : 'rupaya-chip--accent') ">
                             {{ data.item.status.toUpperCase() }}
                         </span>
                     </div>
@@ -173,7 +173,7 @@
                 :per-page="perPage"
                 v-model="currentPage"
                 align="center"
-                class="tomo-pagination"
+                class="rupaya-pagination"
                 @change="pageChange"/>
         </div>
     </div>
@@ -213,7 +213,7 @@ export default {
             loading: false,
             hasProposed: false,
             hasResigned: false,
-            isTomonet: false,
+            isRupxnet: false,
             activeCandidates: 0,
             resignedMN: 0,
             slashedMN: 0,
@@ -243,14 +243,14 @@ export default {
         try {
             if (self.isReady || window.web3) {
                 if (window.web3 && window.web3.currentProvider &&
-                    window.web3.currentProvider.isTomoWallet) {
+                    window.web3.currentProvider.isRupayaWallet) {
                     const wjs = new Web3(window.web3.currentProvider)
-                    await self.setupProvider('tomowalletDapp', wjs)
+                    await self.setupProvider('rupayawalletDapp', wjs)
                     self.account = await self.getAccount()
                     if (self.account) {
                         self.$store.state.address = self.account
                         store.set('address', self.account.toLowerCase())
-                        store.set('network', 'tomowalletDapp')
+                        store.set('network', 'rupayawalletDapp')
                         self.$bus.$emit('logged', 'user logged')
                     }
                 } else {
@@ -258,9 +258,9 @@ export default {
                     self.$store.state.address || await self.getAccount()
                 }
                 let contract
-                contract = self.TomoValidator
+                contract = self.RupayaValidator
                 if (self.account && contract) {
-                    self.isTomonet = true
+                    self.isRupxnet = true
                 }
             }
         } catch (error) {
@@ -272,8 +272,8 @@ export default {
     mounted () { },
     methods: {
         watch: async function () {
-            let contract = await self.getTomoValidatorInstance()
-            contract = self.TomoValidator
+            let contract = await self.getRupayaValidatorInstance()
+            contract = self.RupayaValidator
             const allEvents = contract.allEvents({
                 fromBlock: self.blockNumber,
                 toBlock: 'latest'
@@ -291,15 +291,15 @@ export default {
             let cssClass = ''
 
             if (!this.candidates.length) {
-                cssClass += ' tomo-table--candidates-empty'
+                cssClass += ' rupaya-table--candidates-empty'
             }
 
-            cssClass += this.loading ? ' tomo-table--loading' : ''
+            cssClass += this.loading ? ' rupaya-table--loading' : ''
 
             this.tableCssClass = cssClass
         },
         onRowClick (address) {
-            if (this.isTomonet) {
+            if (this.isRupxnet) {
                 this.$router.push({ path: `/voting/${address}` })
             } else {
                 const toastMessage = 'You can not vote at the moment. Please log in first.'

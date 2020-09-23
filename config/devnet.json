@@ -1,15 +1,15 @@
 {
     "blockchain": {
-        "rpc": "https://testnet.tomochain.com",
-        "ws": "wss://testnet.tomochain.com/ws",
+        "rpc": "https://rpc.testnet.rupx.io",
+        "ws": "wss://ws.testnet.rupx.io/ws",
         "internalRpc": "",
         "internalWs": "",
         "networkId": 89
     },
-    "explorerUrl": "https://scan.devnet.tomochain.com",
-    "tomoscanUrl": "http://tomoscan_server:3333",
-    "baseUrl": "https://master.devnet.tomochain.com",
+    "explorerUrl": "https://scan.devnet.rupx.io",
+    "scanUrl": "http://scan_server:3333",
+    "baseUrl": "https://master.devnet.rupx.io",
     "db": {
-        "uri" : "mongodb://tomomaster_db:27017/governance"
+        "uri" : "mongodb://gov_db:27017/governance"
     }
 }

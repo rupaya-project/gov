@@ -24,7 +24,7 @@
                 class="autocomplete-result"
                 @click="setResult(result)">
                 <p
-                    class="tomo-list__text">
+                    class="rupaya-list__text">
                     <span>{{ result.rank ? result.rank + '. ' : '' }} {{ result.name || 'Anonymous' }} -
                         {{ result.status }}
                     </span>

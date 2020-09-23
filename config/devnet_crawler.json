@@ -1,12 +1,12 @@
 {
     "blockchain": {
-        "rpc": "https://testnet.tomochain.com",
-        "ws": "wss://testnet.tomochain.com/ws",
+        "rpc": "https://rpc.testnet.rupx.io",
+        "ws": "wss://ws.testnet.rupx.io/ws",
         "internalRpc": "",
         "internalWs": "",
         "networkId": 89
     },
     "db": {
-        "uri" : "mongodb://tomomaster_db:27017/governance"
+        "uri" : "mongodb://gov_db:27017/governance"
     }
 }

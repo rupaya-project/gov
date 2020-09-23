@@ -111,7 +111,7 @@ router.get('/:voter/rewards', [
         let limit = (req.query.limit) ? parseInt(req.query.limit) : 100
 
         const rewards = await axios.post(
-            urljoin(config.get('tomoscanUrl'), 'api/expose/rewards'),
+            urljoin(config.get('scanUrl'), 'api/expose/rewards'),
             {
                 address: voter,
                 limit,
@@ -161,7 +161,7 @@ router.post('/generateQR', [
 
         const candidateName = candidateInfo.name ? candidateInfo.name : 'Anonymous'
 
-        const message = voter + ' ' + action + ' ' + amount + ' TOMO for candidate ' + candidate + ' - ' + candidateName
+        const message = voter + ' ' + action + ' ' + amount + ' RUPX for candidate ' + candidate + ' - ' + candidateName
         const id = uuidv4()
 
         const signData = {
@@ -265,7 +265,7 @@ router.post('/verifyTx', [
                             const convertedAmount = new BigNumber(amount)
 
                             if (convertedBalanc.isLessThan(convertedAmount)) {
-                                throw Error('Not enough TOMO')
+                                throw Error('Not enough RUPX')
                             } else {
                                 throw Error('Something went wrong')
                             }
@@ -384,12 +384,12 @@ router.get('/calculatingReward1Day', [], async (req, res, next) => {
         }
 
         // get latest reward
-        let cacheKey = urljoin(config.get('tomoscanUrl'),
+        let cacheKey = urljoin(config.get('scanUrl'),
             'api/expose/rewards', address.toLowerCase(), candidate.owner.toLowerCase())
         let rewards = cache.get(cacheKey)
         if (!rewards) {
             rewards = await axios.post(
-                urljoin(config.get('tomoscanUrl'), 'api/expose/rewards'),
+                urljoin(config.get('scanUrl'), 'api/expose/rewards'),
                 {
                     address: address,
                     limit: 1,
@@ -413,11 +413,11 @@ router.get('/calculatingReward1Day', [], async (req, res, next) => {
         // get total signers in latest epoch
         let totalSigners
         if (epoch) {
-            cacheKey = urljoin(config.get('tomoscanUrl'), `api/expose/totalSignNumber/${epoch}`)
+            cacheKey = urljoin(config.get('scanUrl'), `api/expose/totalSignNumber/${epoch}`)
             totalSigners = cache.get(cacheKey)
             if (!totalSigners) {
                 totalSigners = await axios.post(
-                    urljoin(config.get('tomoscanUrl'), `api/expose/totalSignNumber/${epoch}`)
+                    urljoin(config.get('scanUrl'), `api/expose/totalSignNumber/${epoch}`)
                 )
                 cache.set(cacheKey, totalSigners)
             }

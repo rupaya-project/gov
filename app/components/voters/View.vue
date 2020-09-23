@@ -13,36 +13,36 @@
             <div class="row row-grid">
                 <div
                     v-if="isReady"
-                    class="col-12 tomo-info">
-                    <p class="tomo-info__title">
-                        <i class="tm-dot tomo-info__icon" />
-                        <span class="tomo-info__text">Balance</span>
+                    class="col-12 rupaya-info">
+                    <p class="rupaya-info__title">
+                        <i class="tm-dot rupaya-info__icon" />
+                        <span class="rupaya-info__text">Balance</span>
                     </p>
                     <p
-                        id="tomo-info__description--balance"
-                        class="tomo-info__description">
+                        id="rupaya-info__description--balance"
+                        class="rupaya-info__description">
                         {{ formatCurrencySymbol(formatBigNumber(balance, 3)) }}
                         <b-tooltip
                             v-if="checkLongNumber(balance)"
                             ref="tooltip"
-                            target="tomo-info__description--balance">
+                            target="rupaya-info__description--balance">
                             {{ formatCurrencySymbol(formatBigNumber(balance, 6)) }}
                         </b-tooltip>
                     </p>
                 </div>
-                <div class="col-12 tomo-info">
-                    <p class="tomo-info__title">
-                        <i class="tm-dot tomo-info__icon" />
-                        <span class="tomo-info__text">Total voted</span>
+                <div class="col-12 rupaya-info">
+                    <p class="rupaya-info__title">
+                        <i class="tm-dot rupaya-info__icon" />
+                        <span class="rupaya-info__text">Total voted</span>
                     </p>
                     <p
-                        id="tomo-info__description--voted"
-                        class="tomo-info__description">
+                        id="rupaya-info__description--voted"
+                        class="rupaya-info__description">
                         {{ formatCurrencySymbol(formatNumber(totalVoted)) }}
                         <b-tooltip
                             v-if="checkLongNumber(totalVoted)"
                             ref="tooltip"
-                            target="tomo-info__description--voted">
+                            target="rupaya-info__description--voted">
                             {{ formatCurrencySymbol(formatBigNumber(totalVoted, 6)) }}
                         </b-tooltip>
                     </p>
@@ -51,7 +51,7 @@
         </div>
         <div
             :class="'container section section--candiates mt-5'
-            + (loading ? ' tomo-loading' : '')">
+            + (loading ? ' rupaya-loading' : '')">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
@@ -69,7 +69,7 @@
                 :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
                 :show-empty="true"
-                :class="`tomo-table tomo-table--voted${loading ? ' loading' : ''}`"
+                :class="`rupaya-table rupaya-table--voted${loading ? ' loading' : ''}`"
                 empty-text="There are no candidates to show"
                 stacked="md"
                 @sort-changed="sortingChangeCandidate" >
@@ -113,12 +113,12 @@
                 :per-page="perPage"
                 v-model="currentPage"
                 align="center"
-                class="tomo-pagination"
+                class="rupaya-pagination"
                 @change="candidatePageChange" />
         </div>
         <div
             :class="'container section section--voterrewards'
-            + (rewardLoading ? ' tomo-loading' : '')">
+            + (rewardLoading ? ' rupaya-loading' : '')">
             <div class="row">
                 <div class="col-12">
                     <h3 class="section-title">
@@ -136,7 +136,7 @@
                 :sort-desc.sync="voterRewardsSortDesc"
                 :per-page="voterRewardsPerPage"
                 :show-empty="true"
-                :class="`tomo-table tomo-table--voterrewards${rewardLoading ? ' loading' : ''}`"
+                :class="`rupaya-table rupaya-table--voterrewards${rewardLoading ? ' loading' : ''}`"
                 empty-text="There are no rewards to show"
                 stacked="md" >
 
@@ -183,13 +183,13 @@
                 :per-page="voterRewardsPerPage"
                 v-model="voterRewardsCurrentPage"
                 align="center"
-                class="tomo-pagination"
+                class="rupaya-pagination"
                 @change="rewardPageChange" />
         </div>
 
         <div
             :class="'container section section--txs'
-            + (txLoading ? ' tomo-loading' : '')">
+            + (txLoading ? ' rupaya-loading' : '')">
             <div class="row">
                 <div class="col-12">
                     <h3 class="section-title">
@@ -205,7 +205,7 @@
                 :fields="txFields"
                 :per-page="txPerPage"
                 :show-empty="true"
-                :class="`tomo-table tomo-table--transactions-voter${txLoading ? ' loading' : ''}`"
+                :class="`rupaya-table rupaya-table--transactions-voter${txLoading ? ' loading' : ''}`"
                 empty-text="There are no transactions to show"
                 stacked="md"
                 @sort-changed="sortingChangeTxes" >
@@ -248,10 +248,10 @@
                     <a
                         v-b-tooltip.hover.right
                         :href="`${config.explorerUrl}/txs/${data.item.tx}`"
-                        title="View on TomoScan"
+                        title="View on Scan"
                         target="_blank">
                         <i class="tm-eye" />
-                        <span>View on TomoScan</span>
+                        <span>View on Scan</span>
                     </a>
                 </template>
             </b-table>
@@ -262,7 +262,7 @@
                 :per-page="txPerPage"
                 v-model="txCurrentPage"
                 align="center"
-                class="tomo-pagination"
+                class="rupaya-pagination"
                 @change="txPageChange" />
         </div>
     </div>
@@ -276,9 +276,9 @@ import store from 'store'
 export default {
     name: 'App',
     metaInfo: {
-        title: 'Staker Details | TomoMaster',
+        title: 'Staker Details | RupayaGov',
         meta: [
-            { name: 'description', content: 'Staking history, Reward history, Masternode list, Transaction list. You can use mobile, desktop, hardware wallet - ledger nano, trezor to stake TomoChain' } // eslint-disable-line
+            { name: 'description', content: 'Staking history, Reward history, Masternode list, Transaction list. You can use mobile, desktop, hardware wallet - ledger nano, trezor to stake Rupaya' } // eslint-disable-line
         ]
     },
     data () {

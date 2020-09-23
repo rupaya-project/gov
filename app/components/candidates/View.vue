@@ -4,9 +4,9 @@
             v-if="!isCandidate"
             class="row">
             <div
-                class="tomo-empty col-12">
-                <i class="tm-notice tomo-empty__icon"/>
-                <p class="tomo-empty__description">This is not a candidate</p>
+                class="rupaya-empty col-12">
+                <i class="tm-notice rupaya-empty__icon"/>
+                <p class="rupaya-empty__description">This is not a candidate</p>
             </div>
         </div>
         <div
@@ -45,16 +45,16 @@
                     </div>
                 </div>
                 <b-card
-                    :class="'tomo-card tomo-card--animated tomo-card--candidate'
-                    + (loading ? ' tomo-loading' : '')">
+                    :class="'rupaya-card rupaya-card--animated rupaya-card--candidate'
+                    + (loading ? ' rupaya-loading' : '')">
                     <div class="row m-md-0">
                         <div
-                            class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 tomo-info text-truncate">
-                            <p class="tomo-info__title">
-                                <i class="tm-dot tomo-info__icon" />
-                                <span class="tomo-info__text">Owner</span>
+                            class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 rupaya-info text-truncate">
+                            <p class="rupaya-info__title">
+                                <i class="tm-dot rupaya-info__icon" />
+                                <span class="rupaya-info__text">Owner</span>
                             </p>
-                            <p class="tomo-info__description color-cyan">
+                            <p class="rupaya-info__description color-cyan">
                                 <router-link
                                     :to="'/voter/' + candidate.owner"
                                     class="text-truncate">
@@ -64,61 +64,61 @@
                         </div>
                         <div
                             v-if="candidate.status !== 'PROPOSED'"
-                            class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 tomo-info">
-                            <p class="tomo-info__title">
-                                <i class="tm-dot tomo-info__icon" />
-                                <span class="tomo-info__text">Latest Signed Block</span>
+                            class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 rupaya-info">
+                            <p class="rupaya-info__title">
+                                <i class="tm-dot rupaya-info__icon" />
+                                <span class="rupaya-info__text">Latest Signed Block</span>
                             </p>
-                            <p class="tomo-info__description">
+                            <p class="rupaya-info__description">
                                 <span
-                                    :class="`tomo-status-dot float-left mr-2 tomo-status-dot--${getColor(
+                                    :class="`rupaya-status-dot float-left mr-2 rupaya-status-dot--${getColor(
                                     candidate.latestSignedBlock || 0, currentBlock)}`">
                                     {{ formatNumber(candidate.latestSignedBlock) }}
                                 </span>
                             </p>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 tomo-info">
-                            <p class="tomo-info__title">
-                                <i class="tm-dot tomo-info__icon" />
-                                <span class="tomo-info__text">Capacity</span>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 rupaya-info">
+                            <p class="rupaya-info__title">
+                                <i class="tm-dot rupaya-info__icon" />
+                                <span class="rupaya-info__text">Capacity</span>
                             </p>
                             <p
-                                id="tomo-info__description--cap"
-                                class="tomo-info__description">
+                                id="rupaya-info__description--cap"
+                                class="rupaya-info__description">
                                 {{ formatCurrencySymbol(formatBigNumber(candidate.cap, 3)) }}
                                 <b-tooltip
                                     v-if="checkLongNumber(candidate.cap)"
                                     ref="tooltip"
-                                    target="tomo-info__description--cap">
+                                    target="rupaya-info__description--cap">
                                     {{ formatCurrencySymbol(formatBigNumber(candidate.cap, 6)) }}
                                 </b-tooltip>
                             </p>
                         </div>
                         <div
                             v-if="isReady"
-                            class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 tomo-info">
-                            <p class="tomo-info__title">
-                                <i class="tm-arrow-up tomo-info__icon" />
-                                <span class="tomo-info__text">You voted</span>
+                            class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 rupaya-info">
+                            <p class="rupaya-info__title">
+                                <i class="tm-arrow-up rupaya-info__icon" />
+                                <span class="rupaya-info__text">You voted</span>
                             </p>
                             <p
-                                id="tomo-info__description--you-voted"
-                                class="tomo-info__description">
+                                id="rupaya-info__description--you-voted"
+                                class="rupaya-info__description">
                                 {{ formatCurrencySymbol(formatNumber(candidate.voted)) }}
                                 <b-tooltip
                                     v-if="checkLongNumber(candidate.voted)"
                                     ref="tooltip"
-                                    target="tomo-info__description--you-voted">
+                                    target="rupaya-info__description--you-voted">
                                     {{ formatCurrencySymbol(formatBigNumber(candidate.voted, 6)) }}
                                 </b-tooltip>
                             </p>
                         </div>
                         <div
-                            class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-xl-0 tomo-info">
-                            <p class="tomo-info__title">
-                                <i class="tm-dot tomo-info__icon" />
+                            class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-xl-0 rupaya-info">
+                            <p class="rupaya-info__title">
+                                <i class="tm-dot rupaya-info__icon" />
                                 <span
-                                    class="tomo-info__text">
+                                    class="rupaya-info__text">
                                     Status
                                 </span>
                             </p>
@@ -126,50 +126,50 @@
                                 :class="{ 'color-cyan': candidate.status === 'MASTERNODE',
                                           'color-pink': candidate.status === 'SLASHED',
                                           'color-pink': candidate.status === 'RESIGNED' }"
-                                class="tomo-info__description">
+                                class="rupaya-info__description">
                                 {{ candidate.status }}
                             </p>
                         </div>
-                        <div class="col-12 col-md-6 col-lg-6 col-xl-4 order-md-1 order-lg-0 m-xl-0 tomo-info">
-                            <p class="tomo-info__title">
-                                <i class="tm-dot tomo-info__icon" />
-                                <span class="tomo-info__text">Hardware</span>
+                        <div class="col-12 col-md-6 col-lg-6 col-xl-4 order-md-1 order-lg-0 m-xl-0 rupaya-info">
+                            <p class="rupaya-info__title">
+                                <i class="tm-dot rupaya-info__icon" />
+                                <span class="rupaya-info__text">Hardware</span>
                             </p>
-                            <p class="tomo-info__description">
+                            <p class="rupaya-info__description">
                                 {{ candidate.hardwareInfo }}
                             </p>
                         </div>
                         <div
                             v-for="(value, key) in candidate.dataCenterInfo"
                             :key="key"
-                            class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-xl-0 tomo-info">
-                            <p class="tomo-info__title">
-                                <i class="tm-dot tomo-info__icon" />
-                                <span class="tomo-info__text">{{ key }}</span>
+                            class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-xl-0 rupaya-info">
+                            <p class="rupaya-info__title">
+                                <i class="tm-dot rupaya-info__icon" />
+                                <span class="rupaya-info__text">{{ key }}</span>
                             </p>
-                            <p class="tomo-info__description">
+                            <p class="rupaya-info__description">
                                 {{ value }}
                             </p>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 tomo-info">
-                            <p class="tomo-info__title">
-                                <i class="tm-dot tomo-info__icon" />
-                                <span class="tomo-info__text">Est. Staking ROI</span>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 rupaya-info">
+                            <p class="rupaya-info__title">
+                                <i class="tm-dot rupaya-info__icon" />
+                                <span class="rupaya-info__text">Est. Staking ROI</span>
                             </p>
                             <p
-                                id="tomo-info__description--balance"
-                                class="tomo-info__description">
+                                id="rupaya-info__description--balance"
+                                class="rupaya-info__description">
                                 {{ voterROI ? voterROI + '%' : '---' }}
                             </p>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 tomo-info">
-                            <p class="tomo-info__title">
-                                <i class="tm-dot tomo-info__icon" />
-                                <span class="tomo-info__text">Est. Owner ROI</span>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 rupaya-info">
+                            <p class="rupaya-info__title">
+                                <i class="tm-dot rupaya-info__icon" />
+                                <span class="rupaya-info__text">Est. Owner ROI</span>
                             </p>
                             <p
-                                id="tomo-info__description--balance"
-                                class="tomo-info__description">
+                                id="rupaya-info__description--balance"
+                                class="rupaya-info__description">
                                 {{ mnROI ? mnROI + '%' : '---' }}
                             </p>
                         </div>
@@ -186,7 +186,7 @@
                         :to="`/unvoting/${candidate.address}`"
                         variant="secondary">Unvote</b-button>
                     <b-button
-                        v-if="candidate.status !== 'RESIGNED' && isTomonet"
+                        v-if="candidate.status !== 'RESIGNED' && isRupxnet"
                         :to="`/voting/${candidate.address}`"
                         variant="primary">Vote</b-button>
                 </div>
@@ -223,7 +223,7 @@
             </div> -->
             <div
                 :class="'container section section--mnrewards'
-                + (rewardLoading ? ' tomo-loading' : '')">
+                + (rewardLoading ? ' rupaya-loading' : '')">
                 <div class="row candidate-reward-bar">
                     <div class="col-12">
                         <h3 class="section-title">
@@ -261,7 +261,7 @@
                     :sort-desc.sync="mnRewardsSortDesc"
                     :per-page="mnRewardsPerPage"
                     :show-empty="true"
-                    :class="`tomo-table tomo-table--mnrewards${rewardLoading ? ' loading' : ''}`"
+                    :class="`rupaya-table rupaya-table--mnrewards${rewardLoading ? ' loading' : ''}`"
                     :empty-text="`There are no ${(currentTab !== '' ? 'records' : 'rewards')} to show`"
                     stacked="md" >
 
@@ -294,12 +294,12 @@
                     :per-page="mnRewardsPerPage"
                     v-model="mnRewardsCurrentPage"
                     align="center"
-                    class="tomo-pagination"
+                    class="rupaya-pagination"
                     @change="rewardPageChange" />
             </div>
             <div
                 :class="'container section section-voters'
-                + (voterLoading ? ' tomo-loading' : '')">
+                + (voterLoading ? ' rupaya-loading' : '')">
                 <div class="row">
                     <div class="col-12">
                         <h3 class="section-title">
@@ -315,7 +315,7 @@
                     :fields="voterFields"
                     :per-page="voterPerPage"
                     :show-empty="true"
-                    :class="`tomo-table tomo-table--voter${voterLoading ? ' loading' : ''}`"
+                    :class="`rupaya-table rupaya-table--voter${voterLoading ? ' loading' : ''}`"
                     empty-text="There are no voters to show"
                     stacked="md"
                     @sort-changed="sortingChangeVoters" >
@@ -347,12 +347,12 @@
                     :per-page="voterPerPage"
                     v-model="voterCurrentPage"
                     align="center"
-                    class="tomo-pagination"
+                    class="rupaya-pagination"
                     @change="voterPageChange" />
             </div>
             <div
                 :class="'container section section--txs'
-                + (txLoading ? ' tomo-loading' : '')">
+                + (txLoading ? ' rupaya-loading' : '')">
                 <div class="row">
                     <div class="col-12">
                         <h3 class="section-title">
@@ -368,7 +368,7 @@
                     :fields="txFields"
                     :per-page="txPerPage"
                     :show-empty="true"
-                    :class="`tomo-table tomo-table--transactions${txLoading ? ' loading' : ''}`"
+                    :class="`rupaya-table rupaya-table--transactions${txLoading ? ' loading' : ''}`"
                     empty-text="There are no transactions to show"
                     stacked="md"
                     @sort-changed="sortingChangeTxes" >
@@ -415,10 +415,10 @@
                         <a
                             v-b-tooltip.hover.right
                             :href="`${config.explorerUrl}/txs/${data.item.tx}`"
-                            title="View on TomoScan"
+                            title="View on Scan"
                             target="_blank">
                             <i class="tm-eye" />
-                            <span>View on TomoScan</span>
+                            <span>View on Scan</span>
                         </a>
                     </template>
                 </b-table>
@@ -429,7 +429,7 @@
                     :per-page="txPerPage"
                     v-model="txCurrentPage"
                     align="center"
-                    class="tomo-pagination"
+                    class="rupaya-pagination"
                     @change="txPageChange"/>
             </div>
         </div>
@@ -445,9 +445,9 @@ import store from 'store'
 export default {
     name: 'App',
     metaInfo: {
-        title: 'Candidate Details | TomoMaster',
+        title: 'Candidate Details | RupayaGov',
         meta: [
-            { name: 'description', content: 'Staking TomoChain Masternode to get the reward every epochs. You can use mobile, desktop, hardware wallet - ledger nano, trezor to stake TomoChain' } // eslint-disable-line
+            { name: 'description', content: 'Staking Rupaya Masternode to get the reward every epochs. You can use mobile, desktop, hardware wallet - ledger nano, trezor to stake Rupaya' } // eslint-disable-line
         ]
     },
     components: {
@@ -573,7 +573,7 @@ export default {
             txLoading: false,
             chartLoading: false,
             cpu0Series: [],
-            isTomonet: false,
+            isRupxnet: false,
             currentBlock: null,
             loadedCPU: true,
             loadedMEM: true,
@@ -607,12 +607,12 @@ export default {
         self.isReady = !!self.web3
         try {
             if (self.isReady) {
-                let contract// = self.TomoValidator.deployed()
-                contract = self.TomoValidator
+                let contract// = self.RupayaValidator.deployed()
+                contract = self.RupayaValidator
                 self.account = store.get('address') ||
                     self.$store.state.address || await self.getAccount()
                 if (await self.account && await contract) {
-                    self.isTomonet = true
+                    self.isRupxnet = true
                 }
             }
             this.$bus.$on('CPUResult', function (res) {
@@ -688,8 +688,8 @@ export default {
                     })
                     if (self.account) {
                         try {
-                            let contract// = await self.getTomoValidatorInstance()
-                            contract = self.TomoValidator
+                            let contract// = await self.getRupayaValidatorInstance()
+                            contract = self.RupayaValidator
                             // youVoted = await contract.getVoterCap(address, self.account)
                             youVoted = await contract.methods.getVoterCap(address, self.account)
                                 .call()

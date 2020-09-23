@@ -7,28 +7,28 @@
                     align-h="center"
                     class="m-0">
                     <b-card
-                        :class="'col-12 col-md-8 col-lg-6 tomo-card tomo-card--animated p-0'
-                        + (loading ? ' tomo-loading' : '')">
-                        <h4 class=" color-white tomo-card__title tomo-card__title--big">Withdrawal Confirmation</h4>
+                        :class="'col-12 col-md-8 col-lg-6 rupaya-card rupaya-card--animated p-0'
+                        + (loading ? ' rupaya-loading' : '')">
+                        <h4 class=" color-white rupaya-card__title rupaya-card__title--big">Withdrawal Confirmation</h4>
 
-                        <ul class="tomo-list list-unstyled">
-                            <li class="tomo-list__item">
-                                <i class="tm-wallet tomo-list__icon" />
-                                <p class="tomo-list__text">
+                        <ul class="rupaya-list list-unstyled">
+                            <li class="rupaya-list__item">
+                                <i class="tm-wallet rupaya-list__icon" />
+                                <p class="rupaya-list__text">
                                     <span>{{ coinbase }}</span>
                                     <span>Coinbase Address</span>
                                 </p>
                             </li>
-                            <li class="tomo-list__item">
-                                <i class="tm-tomo2 tomo-list__icon" />
-                                <p class="tomo-list__text">
+                            <li class="rupaya-list__item">
+                                <i class="tm-rupaya2 rupaya-list__icon" />
+                                <p class="rupaya-list__text">
                                     <span> {{ formatCurrencySymbol(formatNumber(capacity)) }}</span>
                                     <span>Capacity</span>
                                 </p>
                             </li>
-                            <li class="tomo-list__item">
-                                <i class="tm-tomo2 tomo-list__icon" />
-                                <p class="tomo-list__text">
+                            <li class="rupaya-list__item">
+                                <i class="tm-rupaya2 rupaya-list__icon" />
+                                <p class="rupaya-list__text">
                                     <span> {{ blockNumber }}</span>
                                     <span>Block Number</span>
                                 </p>
@@ -50,7 +50,7 @@
                                 </div>
                                 <div>
                                     <div
-                                        v-if="provider === 'tomowallet'"
+                                        v-if="provider === 'rupayawallet'"
                                         style="text-align: center; margin-top: 10px">
                                         <vue-qrcode
                                             :value="qrCode"
@@ -71,7 +71,7 @@
                                 variant="secondary"
                                 @click="resignActive = true;">Withdraw</b-button> -->
                             <button
-                                v-if="provider !== 'tomowallet'"
+                                v-if="provider !== 'rupayawallet'"
                                 class="btn btn-primary"
                                 variant="primary"
                                 @click="withdraw(blockNumber, index)">Withdraw</button>
@@ -82,7 +82,7 @@
         </div>
         <b-modal
             id="resignModal"
-            class="tomo-modal"
+            class="rupaya-modal"
             centered
             title="Do you want to withdraw?"
             ok-title="Yes"
@@ -163,12 +163,12 @@ export default {
             self.id = generatedMess.data.id
 
             self.qrCode = encodeURI(
-                'tomochain:withdraw?amount=' + amount + '&' + 'block=' + self.blockNumber +
+                'rupayachain:withdraw?amount=' + amount + '&' + 'block=' + self.blockNumber +
                 '&index=' + self.index +
                 '&submitURL=' + generatedMess.data.url
             )
 
-            if (self.processing && generatedMess.data && self.provider === 'tomowallet') {
+            if (self.processing && generatedMess.data && self.provider === 'rupayawallet') {
                 self.interval = setInterval(async () => {
                     await this.verifyScannedQR()
                 }, 3000)
@@ -178,8 +178,8 @@ export default {
     methods: {
         withdraw: async function (blockNumber, index) {
             let self = this
-            let contract// = await self.getTomoValidatorInstance()
-            contract = self.TomoValidator
+            let contract// = await self.getRupayaValidatorInstance()
+            contract = self.RupayaValidator
             const account = (await self.getAccount() || '').toLowerCase()
             self.loading = true
             try {

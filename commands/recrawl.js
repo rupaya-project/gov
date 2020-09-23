@@ -17,7 +17,7 @@ async function watchValidator (fromBlock, toBlock = false) {
         if (!fromBlock) {
             throw Error('fromBlock(-f) required, toBlock(-t) optional')
         }
-        logger.info('TomoValidator %s - Listen events from block number %s ...',
+        logger.info('RupayaValidator %s - Listen events from block number %s ...',
             config.get('blockchain.validatorAddress'), fromBlock)
 
         return validator.getPastEvents('allEvents', {

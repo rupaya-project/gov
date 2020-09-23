@@ -1,15 +1,15 @@
 import BigNumber from 'bignumber.js'
-import TomoValidatorArtifacts from '../build/contracts/TomoValidator.json'
+import RupayaValidatorArtifacts from '../build/contracts/RupayaValidator.json'
 
 const Helper = {
     getCurrencySymbol () {
-        return 'TOMO'
+        return 'RUPX'
     },
     formatCurrencySymbol (number) {
         let unit = this.getCurrencySymbol()
 
         if (unit === null) {
-            unit = 'TOMO'
+            unit = 'RUPX'
         }
         return `${number} ${unit}`
     },
@@ -86,7 +86,7 @@ const Helper = {
 
         return this.formatNumber(num)
     },
-    TomoValidatorArtifacts
+    RupayaValidatorArtifacts
 }
 
 export default Helper

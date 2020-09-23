@@ -6,11 +6,11 @@
             align-h="center"
             class="m-0">
             <b-card
-                :class="'col-12 col-md-8 col-lg-6 tomo-card tomo-card--lighter p-0'
-                + (loading ? ' tomo-loading' : '')">
-                <h4 class=" color-white tomo-card__title tomo-card__title--big">Update Candidate Information</h4>
+                :class="'col-12 col-md-8 col-lg-6 rupaya-card rupaya-card--lighter p-0'
+                + (loading ? ' rupaya-loading' : '')">
+                <h4 class=" color-white rupaya-card__title rupaya-card__title--big">Update Candidate Information</h4>
                 <b-form
-                    class="tomo-form tomo-form--vote"
+                    class="rupaya-form rupaya-form--vote"
                     novalidate
                     @submit.prevent="validate()">
                     <b-form-group
@@ -106,9 +106,9 @@
             align-h="center"
             class="m-0">
             <b-card
-                :class="'col-12 col-md-8 col-lg-6 tomo-card tomo-card--lighter p-0'
-                + (loading ? ' tomo-loading' : '')">
-                <h4 class=" color-white tomo-card__title tomo-card__title--big">Confirmation</h4>
+                :class="'col-12 col-md-8 col-lg-6 rupaya-card rupaya-card--lighter p-0'
+                + (loading ? ' rupaya-loading' : '')">
+                <h4 class=" color-white rupaya-card__title rupaya-card__title--big">Confirmation</h4>
                 <div>
                     <div
                         class="wrapper">
@@ -128,7 +128,7 @@
                         <div
                             style="margin-top: 20px">
                             <div
-                                v-if="provider === 'tomowallet'"
+                                v-if="provider === 'rupayawallet'"
                                 style="text-align: center">
                                 <vue-qrcode
                                     :value="qrCode"
@@ -151,7 +151,7 @@
                             variant="secondary"
                             @click="backStep">Back</b-button>
                         <button
-                            v-if="provider !== 'tomowallet'"
+                            v-if="provider !== 'rupayawallet'"
                             class="btn btn-primary"
                             variant="primary"
                             @click="update">Submit</button>
@@ -330,12 +330,12 @@ export default {
                 self.message = data.message
                 self.id = data.id
                 self.qrCode = encodeURI(
-                    'tomochain:sign?message=' + self.message +
+                    'rupayachain:sign?message=' + self.message +
                     '&submitURL=' + data.url
                 )
             }
             self.step++
-            if (self.step === 2 && self.provider === 'tomowallet') {
+            if (self.step === 2 && self.provider === 'rupayawallet') {
                 self.interval = setInterval(async () => {
                     await this.verifyScannedQR()
                 }, 3000)
@@ -387,7 +387,7 @@ export default {
                     self.loading = false
                     self.signHashError = ''
                     self.signHash = ''
-                    if (self.provider === 'tomowallet') {
+                    if (self.provider === 'rupayawallet') {
                         self.signHashError = data.error.message
                         return false
                     } else {

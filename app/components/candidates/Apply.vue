@@ -5,31 +5,31 @@
             align-h="center"
             class="m-0">
             <b-card
-                :class="'col-12 col-md-8 col-lg-6 tomo-card tomo-card--lighter p-0'
-                + (loading ? ' tomo-loading' : '')">
-                <h4 class="color-white tomo-card__title tomo-card__title--big">Become a Candidate</h4>
-                <ul class="tomo-list list-unstyled">
-                    <li class="tomo-list__item">
-                        <i class="tm-tomo2 tomo-list__icon" />
-                        <span class="tomo-list__text">You have to deposit at least 50,000 TOMO</span>
+                :class="'col-12 col-md-8 col-lg-6 rupaya-card rupaya-card--lighter p-0'
+                + (loading ? ' rupaya-loading' : '')">
+                <h4 class="color-white rupaya-card__title rupaya-card__title--big">Become a Candidate</h4>
+                <ul class="rupaya-list list-unstyled">
+                    <li class="rupaya-list__item">
+                        <i class="tm-rupaya2 rupaya-list__icon" />
+                        <span class="rupaya-list__text">You have to deposit at least 50,000 RUPX</span>
                     </li>
-                    <li class="tomo-list__item">
-                        <i class="tm-lock tomo-list__icon" />
-                        <span class="tomo-list__text">Your deposit will be locked</span>
+                    <li class="rupaya-list__item">
+                        <i class="tm-lock rupaya-list__icon" />
+                        <span class="rupaya-list__text">Your deposit will be locked</span>
                     </li>
-                    <li class="tomo-list__item">
-                        <i class="tm-arrow-up tomo-list__icon" />
-                        <span class="tomo-list__text">
+                    <li class="rupaya-list__item">
+                        <i class="tm-arrow-up rupaya-list__icon" />
+                        <span class="rupaya-list__text">
                             Coin holders are able to vote for you to become a masternode</span>
                     </li>
                 </ul>
 
                 <b-form
-                    class="tomo-form tomo-form--apply"
+                    class="rupaya-form rupaya-form--apply"
                     novalidate
                     @submit.prevent="validate()">
                     <b-form-group
-                        :description="`How much TOMO do you want to deposit? TX fee: ${txFee} TOMO`"
+                        :description="`How much RUPX do you want to deposit? TX fee: ${txFee} RUPX`"
                         label="Vote"
                         label-for="apply-value">
                         <b-input-group>
@@ -40,14 +40,14 @@
                                 v-model="applyValue"
                                 name="apply-value"/>
                             <b-input-group-append>
-                                <i class="tm-tomo2" />
+                                <i class="tm-rupaya2" />
                             </b-input-group-append>
                             <span
                                 v-if="$v.applyValue.$dirty && !$v.applyValue.required"
                                 class="text-danger">Required field</span>
                             <span
                                 v-else-if="$v.applyValue.$dirty && !$v.applyValue.minValue"
-                                class="text-danger">Must be greater than 50,000 TOMO</span>
+                                class="text-danger">Must be greater than 50,000 RUPX</span>
                         </b-input-group>
                     </b-form-group>
                     <b-form-group
@@ -107,12 +107,12 @@
         </b-row>
         <b-modal
             ref="applyModal"
-            class="tomo-modal"
+            class="rupaya-modal"
             centered
-            title="Scan this QR code by TomoWallet"
+            title="Scan this QR code by RupayaWallet"
             hide-footer>
             <div
-                v-if="provider === 'tomowallet'"
+                v-if="provider === 'rupayawallet'"
                 style="text-align: center">
                 <vue-qrcode
                     :value="qrCode"
@@ -250,7 +250,7 @@ export default {
                     const convertedAmount = new BigNumber(this.applyValue)
 
                     if (this.balance.isLessThan(convertedAmount)) {
-                        this.$toasted.show(`Not enough TOMO`, {
+                        this.$toasted.show(`Not enough RUPX`, {
                             type: 'error'
                         })
                         return false
@@ -260,7 +260,7 @@ export default {
                         this.candidateError = true
                     } else {
                         this.candidateError = false
-                        if (this.provider !== 'tomowallet') {
+                        if (this.provider !== 'rupayawallet') {
                             await this.apply()
                         } else {
                             if (this.interval) {
@@ -287,8 +287,8 @@ export default {
 
                 self.loading = true
 
-                let contract// = await self.getTomoValidatorInstance()
-                contract = self.TomoValidator
+                let contract// = await self.getRupayaValidatorInstance()
+                contract = self.RupayaValidator
                 const account = (await self.getAccount() || '').toLowerCase()
                 let txParams = {
                     from : account,
@@ -395,7 +395,7 @@ export default {
                 self.message = data.message
                 self.id = data.id
                 self.qrCode = encodeURI(
-                    'tomochain:propose?amount=' + amount +
+                    'rupayachain:propose?amount=' + amount +
                     '&candidate=' + coinbase +
                     '&submitURL=' + data.url
                 )

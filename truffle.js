@@ -17,7 +17,7 @@ module.exports = {
             gas: 4000000,
             network_id: '*'
         },
-        tomo: {
+        rupaya: {
             provider: function () {
                 let w = new HDWalletProvider(config.get('truffle.mnemonic'), config.get('blockchain.publicRpc'))
                 let nonceTracker = new NonceTrackerSubprovider()

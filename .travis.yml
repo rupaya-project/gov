@@ -53,28 +53,28 @@ jobs:
         - docker
       install: skip
       before_script:
-        - docker build -t tomochain/tomomaster .
+        - docker build -t rupaya-project/gov .
       script:
         - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-        - docker tag tomochain/tomomaster tomochain/tomomaster:latest
-        - docker push tomochain/tomomaster:latest
-        - docker tag tomochain/tomomaster tomochain/tomomaster:$TRAVIS_BUILD_ID
-        - docker push tomochain/tomomaster:$TRAVIS_BUILD_ID
+        - docker tag rupaya-project/gov rupaya-project/gov:latest
+        - docker push rupaya-project/gov:latest
+        - docker tag rupaya-project/gov rupaya-project/gov:$TRAVIS_BUILD_ID
+        - docker push rupaya-project/gov:$TRAVIS_BUILD_ID
 
     - stage: Build and push image (tagged)
       services:
         - docker
       install: skip
       before_script:
-        - docker build -t tomochain/tomomaster .
+        - docker build -t rupaya-project/gov .
       script:
         - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-        - docker tag tomochain/tomomaster tomochain/tomomaster:latest
-        - docker push tomochain/tomomaster:latest
-        - docker tag tomochain/tomomaster tomochain/tomomaster:testnet
-        - docker push tomochain/tomomaster:testnet
-        - docker tag tomochain/tomomaster tomochain/tomomaster:$TRAVIS_TAG
-        - docker push tomochain/tomomaster:$TRAVIS_TAG
+        - docker tag rupaya-project/gov rupaya-project/gov:latest
+        - docker push rupaya-project/gov:latest
+        - docker tag rupaya-project/gov rupaya-project/gov:testnet
+        - docker push rupaya-project/gov:testnet
+        - docker tag rupaya-project/gov rupaya-project/gov:$TRAVIS_TAG
+        - docker push rupaya-project/gov:$TRAVIS_TAG
 
 stages:
   - name: Lint
@@ -82,9 +82,9 @@ stages:
   - name: Test
   - name: Coverage
   - name: Build and push image
-    if: type != pull_request AND branch = master AND tag IS blank AND repo = tomochain/tomomaster
+    if: type != pull_request AND branch = master AND tag IS blank AND repo = rupaya-project/gov
   - name: Build and push image (tagged)
-    if: type != pull_request AND branch =~ ^v AND tag IS present AND repo = tomochain/tomomaster
+    if: type != pull_request AND branch =~ ^v AND tag IS present AND repo = rupaya-project/gov
   - name: Release desktop application
-    if: type != pull_request AND branch =~ ^v AND tag IS present AND repo = tomochain/tomomaster
+    if: type != pull_request AND branch =~ ^v AND tag IS present AND repo = rupaya-project/gov
 
