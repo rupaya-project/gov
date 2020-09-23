@@ -1,7 +1,7 @@
 {
     "blockchain": {
-        "rpc": "http://rpc.testnet.rupx.io",
-        "ws": "ws://ws.testnet.rupx.io/ws",
+        "rpc": "http://rpc.testnet.rupx.io:7050",
+        "ws": "ws://ws.testnet.rupx.io:8050/ws",
         "internalRpc": "",
         "internalWs": "",
         "networkId": 89

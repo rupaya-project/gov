@@ -1,12 +1,12 @@
 {
     "blockchain": {
-        "rpc": "http://rpc.rpc.testnet.rupx.io",
-        "ws": "ws://ws.testnet.rupx.io",
+        "rpc": "http://rpc.testnet.rupx.io:7050",
+        "ws": "ws://ws.testnet.rupx.io:8050",
         "internalRpc": "",
         "internalWs": "",
         "networkId": 89
     },
-    "explorerUrl": "https://scan.rpc.testnet.rupx.io",
+    "explorerUrl": "https://scan.testnet.rupx.io",
     "scanUrl": "http://scan_server:3333",
     "baseUrl": "https://gov.testnet.rupx.io/",
     "db": {
