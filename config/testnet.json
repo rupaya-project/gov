@@ -4,7 +4,7 @@
         "ws": "wss://ws.testnet.rupx.io",
         "internalRpc": "",
         "internalWs": "",
-        "networkId": 89
+        "networkId": 499
     },
     "explorerUrl": "https://scan.testnet.rupx.io",
     "scanUrl": "http://scan_server:3333",

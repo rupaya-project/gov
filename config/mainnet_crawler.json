@@ -4,7 +4,7 @@
     },
     "blockchain": {
         "rpc": "https://rpc.rupx.io",
-        "ws": "wss://ws.rupx.io",
+        "ws": "wss://ws.rupx.io/ws",
         "internalRpc": "",
         "internalWs": "",
         "networkId": 499

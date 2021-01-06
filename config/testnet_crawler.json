@@ -4,7 +4,7 @@
         "ws": "wss://ws.testnet.rupx.io/ws",
         "internalRpc": "",
         "internalWs": "",
-        "networkId": 89
+        "networkId": 499
     },
     "db": {
         "uri" : "mongodb://gov_db:27017/governance"

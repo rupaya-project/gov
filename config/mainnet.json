@@ -5,8 +5,8 @@
     "blockchain": {
         "rpc": "https://rpc.rupx.io",
         "ws": "wss://ws.rupx.io",
-        "internalRpc": "",
-        "internalWs": "",
+        "internalRpc": "http://nodemaster_mnone:7050",
+        "internalWs": "ws://nodemaster_mntwo:8050",
         "networkId": 499
     },
     "explorerUrl": "https://scan.rupx.io",
