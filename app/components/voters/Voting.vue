@@ -58,7 +58,7 @@
                                     class="text-danger">Required field</span>
                                 <span
                                     v-else-if="$v.voteValue.$dirty && !$v.voteValue.minValue"
-                                    class="text-danger">Minimum of voting is 100 RUPX</span>
+                                    class="text-danger">Minimum of voting is 10000 RUPX</span>
                                 <span
                                     v-else-if="votingError"
                                     class="text-danger">Not enough RUPX</span>
@@ -207,7 +207,7 @@ export default {
     validations: {
         voteValue: {
             required,
-            minValue: minValue(100)
+            minValue: minValue(10000)
         }
     },
     computed: {

@@ -403,8 +403,8 @@ export default {
             chainConfig: {},
             networks: {
                 // mainnet: 'https://core.rupx.io',
-                rpc: 'https://rpc.testnet.rupx.io',
-                rupayawallet: 'https://rpc.testnet.rupx.io'
+                rpc: 'https://rpc.rupx.io',
+                rupayawallet: 'https://wallet.rupx.io'
             },
             loading: false,
             qrCode: 'text',
