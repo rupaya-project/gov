@@ -46,7 +46,7 @@
                             <b-input-group>
                                 <number-input
                                     :class="getValidationClass('voteValue')"
-                                    :min="10"
+                                    :min="1000"
                                     :step="10"
                                     v-model="voteValue"
                                     name="vote-value"/>
