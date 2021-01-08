@@ -1,4 +1,4 @@
-.rupaya-table {
+.tomo-table {
     width: 100%;
     overflow: hidden;
     margin-bottom: 50px;
@@ -193,7 +193,7 @@
     }
 }
 
-.rupaya-table--loading {
+.tomo-table--loading {
 
     tr.b-table-empty-row > td div.text-center {
         font-size: 0;
@@ -204,7 +204,7 @@
     }
 }
 
-.rupaya-table--candidates {
+.tomo-table--candidates {
     margin-bottom: 0;
 
     .btn {
@@ -289,7 +289,7 @@
             position: relative;
             font-size: 12px;
 
-            .rupaya-chip {
+            .tomo-chip {
                 width: 100%;
             }
         }
@@ -405,7 +405,7 @@
             background-color: $color-body-bg;
         }
 
-        &.rupaya-table--candidates-empty {
+        &.tomo-table--candidates-empty {
 
             th[aria-colindex="5"]:after,
             th[aria-colindex="7"]:after {
@@ -450,7 +450,7 @@
     }
 }
 
-.rupaya-table--voted {
+.tomo-table--voted {
 
     th[aria-colindex="1"],
     th[aria-colindex="2"],
@@ -478,7 +478,7 @@
     }
 }
 
-.rupaya-table--voter {
+.tomo-table--voter {
     th[aria-colindex="1"] {
         padding-left: 0px;
     }
@@ -501,7 +501,7 @@
     }
 }
 
-.rupaya-table--transactions {
+.tomo-table--transactions {
 
     th[aria-colindex="1"],
     th[aria-colindex="4"],
@@ -567,7 +567,7 @@
     }
 }
 
-.rupaya-table--transactions-voter {
+.tomo-table--transactions-voter {
 
     th[aria-colindex="1"],
     th[aria-colindex="2"],
@@ -633,7 +633,7 @@
     }
 }
 
-.rupaya-table--signers {
+.tomo-table--signers {
 
     td {
         grid-template-columns: 30% auto !important;
@@ -682,7 +682,7 @@
     }
 }
 
-.rupaya-table--signed {
+.tomo-table--signed {
 
     td[aria-colindex="4"] {
         text-align: center;
@@ -736,7 +736,7 @@
     }
 }
 
-.rupaya-table--voterrewards {
+.tomo-table--voterrewards {
     th[aria-colindex="1"],
     th[aria-colindex="2"],
     th[aria-colindex="3"],
@@ -763,7 +763,7 @@
     }
 }
 
-.rupaya-table--mnrewards {
+.tomo-table--mnrewards {
     .text-truncate {
         max-width: 90%;
     }

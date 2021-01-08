@@ -1,11 +1,11 @@
-.rupaya-info {
+.tomo-info {
     margin-bottom: 30px;
 
-    .rupaya-info__title {
+    .tomo-info__title {
         margin-bottom: 5px;
     }
 
-    .rupaya-info__icon {
+    .tomo-info__icon {
         font-size: 6px;
         vertical-align: middle;
         color: #6e92f7;
@@ -17,14 +17,14 @@
         }
     }
 
-    .rupaya-info__text {
+    .tomo-info__text {
         font-size: 14px;
         display: inline-block;
         vertical-align: middle;
         text-transform: capitalize;
     }
 
-    .rupaya-info__description {
+    .tomo-info__description {
         font-size: 16px;
         color: #938fb5;
         display: inline-block;
@@ -34,11 +34,11 @@
 
     &--big {
 
-        .rupaya-info__icon {
+        .tomo-info__icon {
             font-size: 13px;
         }
 
-        .rupaya-info__description {
+        .tomo-info__description {
             margin-left: 20px;
         }
     }

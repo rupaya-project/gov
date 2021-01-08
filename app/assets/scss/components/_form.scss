@@ -1,4 +1,4 @@
-.rupaya-form {
+.tomo-form {
 
     .input-group-append {
         background-color: $color-input-focus-bg;
@@ -6,7 +6,7 @@
         border-bottom-right-radius: 8px;
     }
 
-    .input-group-append .tm-rupaya {
+    .input-group-append .tm-tomo {
         height: 35px;
         width: 35px;
         font-size: 20px;
@@ -43,7 +43,7 @@
     }
 }
 
-.rupaya-form--setting {
+.tomo-form--setting {
 
     select.custom-select {
         width: 100%;

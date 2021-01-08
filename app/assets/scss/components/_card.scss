@@ -1,4 +1,4 @@
-.rupaya-card {
+.tomo-card {
     margin-bottom: 30px;
     border-radius: 8px;
     border: none;
@@ -11,12 +11,12 @@
     &--animated {
         background-image: linear-gradient(-135deg, #2d2d4a, #40406A, #1d1e31);
         background-size: 400% 400%;
-        animation: gov 10s ease infinite;
+        animation: tomomaster 10s ease infinite;
     }
 
     @extend %transit;
 
-    .rupaya-card__title {
+    .tomo-card__title {
         font-size: 16px;
         font-weight: 500;
         color: $color-text-highlight;
@@ -28,7 +28,7 @@
         }
     }
 
-    .rupaya-card__subtitle {
+    .tomo-card__subtitle {
         font-size: 14px;
         font-weight: 400;
         display: block;
@@ -36,8 +36,8 @@
         margin-top: 10px;
     }
 
-    .rupaya-card__text,
-    .rupaya-card__text a {
+    .tomo-card__text,
+    .tomo-card__text a {
         font-size: 30px;
         color: $color-text;
         margin-bottom: 0;
@@ -60,7 +60,7 @@
     }
 }
 
-.rupaya-card--candidate {
+.tomo-card--candidate {
 
     .card-footer {
         margin-top: 20px;
