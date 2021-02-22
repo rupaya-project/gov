@@ -1,7 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-// var appName = '[name].[hash].js'
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const commonConfig = require('./webpack.config.common')
@@ -15,12 +14,12 @@ const webpackConfig = merge(commonConfig, {
     output: {
         path: path.resolve(__dirname, '../build'),
         publicPath: '/build/',
-        filename: '[name].[hash].js',
-        chunkFilename: '[name].chunks.[chunkhash].js'
+        filename: '[name].[contenthash].js'
+        // chunkFilename: '[name].chunks.[chunkhash].js'
         // jsonpFunction: 'pluginWebpack'
     },
     optimization: {
-        minimize: process.env.NODE_ENV === 'production',
+        minimize: true,
         splitChunks: {
             chunks: 'all',
             minSize: 30000,
@@ -54,14 +53,17 @@ const webpackConfig = merge(commonConfig, {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
-            minimizer: new UglifyJsPlugin({
-                uglifyOptions: {
-                    sourceMap: false,
-                    compress: {
-                        warnings: false
+            minimizer: [
+                new TerserPlugin({
+                    terserOptions: {
+                        sourceMap: true,
+                        loops: false,
+                        compress: {
+                            warning: false
+                        }
                     }
-                }
-            })
+                })
+            ]
         }),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: ['**/*js', '**/*html', '**/*svg']

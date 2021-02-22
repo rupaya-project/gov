@@ -444,7 +444,9 @@ export default {
         }
     },
     created: async function () {
-        this.provider = this.NetworkProvider || 'rupayawallet'
+        if (this.NetworkProvider) {
+            this.provider = this.NetworkProvider
+        }
         let self = this
         self.hdWallets = self.hdWallets || {}
         self.config = store.get('configMaster') || await self.appConfig()
@@ -464,11 +466,10 @@ export default {
                 }
                 if (self.web3) {
                     try {
-                        // contract = await self.getRupayaValidatorInstance()
                         contract = self.RupayaValidator
                         self.gasPrice = await self.web3.eth.getGasPrice()
                     } catch (error) {
-                        throw Error('Make sure you choose correct rupayachain network.')
+                        self.$toasted.show('Make sure you choose correct Rupaya network.')
                     }
                 }
 
@@ -480,18 +481,19 @@ export default {
                 }
 
                 if (!account) {
-                    if (store.get('address') && self.provider !== 'custom') {
-                        account = store.get('address')
-                    } else return false
+                    return false
+                    // if (store.get('address') && self.provider !== 'custom') {
+                    //     account = store.get('address')
+                    // } else return false
                 }
 
                 self.address = account
-                self.web3.eth.getBalance(self.address, function (a, b) {
-                    self.balance = new BigNumber(b).div(10 ** 18)
-                    if (a) {
-                        console.log('got an error', a)
-                    }
+                self.web3.eth.getBalance(self.address).then(balanceBN => {
+                    self.balance = new BigNumber(balanceBN).div(10 ** 18)
+                }).catch(e => {
+                    self.$toasted.show('Cannot load balance', { type: 'error' })
                 })
+
                 let whPromise = axios.get(`/api/owners/${self.address}/withdraws?limit=100`)
                 if (contract) {
                     // let blksPromise = contract.getWithdrawBlockNumbers.call({ from: account })
@@ -619,8 +621,8 @@ export default {
                 let offset
                 switch (self.provider) {
                 case 'metamask':
-                    if (window.web3) {
-                        var p = window.web3.currentProvider
+                    if (window.ethereum) {
+                        var p = window.ethereum
                         wjs = new Web3(p)
                     }
                     break
@@ -673,12 +675,6 @@ export default {
                     }
                     self.$bus.$emit('logged', 'user logged')
                     self.$toasted.show('Network Provider was changed successfully')
-                } else {
-                    self.$toasted.show(
-                        'Couldn\'t get any accounts! Make sure ' +
-                        'your Ethereum client is configured correctly.', {
-                            type : 'error'
-                        })
                 }
             } catch (e) {
                 self.loading = false
